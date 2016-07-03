@@ -4,7 +4,8 @@ import re
 from slugify import slugify
 
 pageScript = []
-topicList = []
+topicNames = []
+topicSlugs =[]
 currentTopic = ""
 specialPages = {
 	"kidParent":"Children",
@@ -36,7 +37,11 @@ def sitemapProcess(sitemap,themename):
 		'site_map':sitemaparray,
 		'page_script':pageScript,
 		'specialPages':specialPages,
+		'topicNames':topicNames,
+		'topicSlugs':topicSlugs,
 		}
+	from editTheme import processTheme
+	zipName = processTheme(topicNames,topicSlugs,themeslug)
 	#return site info dictionary
 	return siteinfo
 
@@ -56,13 +61,16 @@ def createPages(_sitemaparray):
 	global pageScript
 	global currentTopic
 	global topicList
+	global topicNames
+	global topicSlugs
 	for item in _sitemaparray:		
 		if item[:2] != '##':
 			currentTopic = item.strip()
-			topicList.extend([currentTopic])
+			topicNames.extend([currentTopic])
+			topicSlugs.extend([slugify(currentTopic, to_lower=True)])
 		else:
 			item = re.sub("^[(#\s)]{1,}","",item).strip()
-			pageScript.extend([currentTopic+'\\'+slugify(currentTopic.strip(), to_lower=True)+'||'+processPage(item)])
+			pageScript.extend([currentTopic+'\\'+slugify(currentTopic, to_lower=True)+'||'+processPage(item)])
 	return pageScript
 
 def processPage(input):

@@ -1,0 +1,35 @@
+{% extends "Richard/base.html" %}
+{% load themer %}
+
+{% block title %}{% page_title %}{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+  <body class="aboutusBody">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block page_title %}
+  {% page_title %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  <li><a href="{% home_url %}">Home</a></li>
+  <li><a href="{% topic_url about-us %}">About Us</a></li>
+  {% page_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+  {% page_body %}
+  <br class="clear" />
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "MyTheme/base.html" %}
+{% load themer %}
+
+{% block title %}{% current_topic_title %}{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+  <body>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block page_title %}
+  {% current_topic_title %}
+{% endblock %}
+
+{% block breadcrumbs %}
+  <li><a href="{% home_url %}">Home</a></li>
+  <li><a href="{% topic_url children %}">Children</a></li>
+  <li><a href="{{ request.path }}">{% current_topic_title %}</a></li>
+{% endblock %}
+
+{% block content %}    
+  <ul class="topic-menu icon-box classpages">{% current_topic_menu %}</ul>
+  <br class="clear" />
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

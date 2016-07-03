@@ -1,8 +1,10 @@
-%themename = siteinfo['theme_name']
-%themeslug = siteinfo['theme_slug']
-%sitemap = siteinfo['site_map']
-%pageScript = siteinfo['page_script']
-%specialPages = siteinfo['specialPages']
+% themename = siteinfo['theme_name']
+% themeslug = siteinfo['theme_slug']
+% sitemap = siteinfo['site_map']
+% pageScript = siteinfo['page_script']
+% specialPages = siteinfo['specialPages']
+% topicNames = siteinfo['topicNames']
+% topicSlugs = siteinfo['topicSlugs']
 
 {{themename}}
 {{themeslug}}
@@ -12,11 +14,18 @@
 % end
 </ul>
 <hr>
-%for item in pageScript:
+% for item in pageScript:
 	{{item}}<br>
-%end
+% end
 <hr>
-
 % for key, value in specialPages.iteritems():
 	{{key}} - {{value}}<br>
+% end
+<hr>
+% for item in topicNames:
+	{{item}}<br>
+% end
+<hr>
+% for item in topicSlugs:
+	{{item}}<br>
 % end

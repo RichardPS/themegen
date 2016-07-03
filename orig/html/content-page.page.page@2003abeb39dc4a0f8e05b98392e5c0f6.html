@@ -1,0 +1,24 @@
+{% extends "Richard/base.html" %}
+{% load themer %}
+
+{% block title %}{% page_title %}{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}{% page_title %}{% endblock %}
+
+{% block breadcrumbs %}{% page_breadcrumbs_with_home %}{% endblock %}
+
+{% block content %}
+	{% block menu %}
+    {% block safe-body %}{% page_body %}{% endblock %}
+	{% endblock %}
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}

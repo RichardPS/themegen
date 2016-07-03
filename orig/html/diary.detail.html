@@ -1,0 +1,30 @@
+{% extends "Richard/base.html" %}
+{% load themer %}
+
+{% block title %}{% diary_title %}{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}Calendar{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% home_url %}">Home</a></li>
+    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
+    <li><a href="{% diary_url %}">Calendar</a></li>
+    <li><a href="{{ request.path }}">{% diary_title %}</a></li>
+{% endblock %}
+
+{% block content %}
+      <h2>{% diary_title %}</h2>
+      <span class="diary-event-time">Start: </span>{% diary_start_datetime %}
+      <span class="diary-event-time">End: </span>{% diary_end_datetime %}
+      <span class="diary-body">{% diary_body %}</span>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}

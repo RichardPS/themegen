@@ -1,0 +1,26 @@
+{% extends "Richard/base.html" %}
+{% load themer %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}Calendar{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% home_url %}">Home</a></li>
+    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
+    <li><a href="{% url 'diary_grid' year month_number %}">Calendar</a></li>
+{% endblock %}
+
+{% block content %}
+    {% block calendar %}{% endblock %}
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}

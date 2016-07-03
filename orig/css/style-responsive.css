@@ -1,0 +1,183 @@
+/* SITE CORE STYLES
+=================== */
+html {
+  font-size: 70%;
+  background: #0c71d9;
+}
+
+body {
+  background: #0c71d9;
+}
+
+
+/* Typography
+ ============ */
+h2, .xlarge {
+  font-size: 1.9rem;
+  line-height: 1.3;
+}
+
+h3, .large {
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+h4, .medium {
+  line-height: 1.3;
+}
+
+
+/* Website Struture
+=================== */
+.main-header {
+  height: 144px;
+  background: #0c71d9 url(header-640px.jpg) center top no-repeat;
+}
+
+/* Home link within the header should be across whole of header */
+.home-link {
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  top: 6px;
+  margin: 0 auto;
+  border: 1px solid red; /* Remove the border - Only present for visability */
+}
+
+.content-container {
+  padding: 0 15px 20px;
+  border-top: 7px solid #f7d91f;
+  border-bottom: 7px solid #f7d91f;
+  background: #fff;
+}
+
+
+/* Breadcrumbs
+============== */
+.breadcrumbs {
+  padding: 10px 0;
+}
+
+
+/* Page Title
+============= */
+.page-title {
+  width: 100%;
+  padding: 2px 15px;
+  margin-left: -15px;
+  background: #ff8400;
+}
+
+
+/* Footer
+========= */
+footer {
+  height: 187px;
+  background: url(footer-640px.jpg) left bottom no-repeat;
+}
+
+
+/* Responsive Navigation
+======================== */
+.responsive-bar {
+  background: #C7C7C7;
+}
+
+.main-nav {
+  background: #E6E6E6;
+}
+
+.main-nav h2 {
+  border-color: #C8C8C8;
+}
+
+.responsive-bar,
+.website-navbar-toggle:before,
+.main-nav,
+.main-nav h2 {
+  color: #747474;
+}
+
+.main-nav a {
+  color: #747474;
+}
+
+.main-nav a:focus,
+.main-nav a:hover {
+  color: #0C71D9;
+}
+
+
+/* Back Arrow and Closing Navigation */
+
+.main-nav .close-mobile-nav,
+.main-nav .ps_activate-main-nav {
+  color: #747474;
+}
+
+.main-nav .close-mobile-nav:focus,
+.main-nav .close-mobile-nav:hover,
+.main-nav .ps_activate-main-nav:focus,
+.main-nav .ps_activate-main-nav:hover {
+  color: #0C71D9;
+}
+
+
+/* Log in Link (Responsive Menu)
+================================ */
+.login-responsive a {
+  color: #E6E6E6;
+  background: #747474;
+}
+
+.login-responsive a:focus,
+.login-responsive a:hover {
+  color: #fff;
+}
+
+
+/* Policy & PrimarySite Link
+============================ */
+.footer-links {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+}
+
+.footer-links ul {
+  text-align: center;
+  float: none;
+}
+
+.footer-left {
+  margin-bottom: 10px;
+}
+
+.footer-links li {
+  margin: 0;
+}
+
+.footer-links a {
+  color: #fff;
+}
+
+.footer-links a:focus,
+.footer-links a:hover {
+  color: #000;
+}
+
+
+/* Additional Media Queries (Images etc.)
+========================================= */
+@media (max-width: 640px) {
+
+  .main-header {
+    height: 144px;
+    background: #0c71d9 url(header-320px.jpg) center top no-repeat;
+  }
+
+  footer {
+    height: 187px;
+    background: url(footer-320px.jpg) left bottom no-repeat;
+  }
+
+}
