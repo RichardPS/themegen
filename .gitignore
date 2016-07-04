@@ -1,4 +1,7 @@
-.pyc
+*.pyc
+*.sublime-project
+*.sublime-workspace
+
 new/
 orig/
 themes/
