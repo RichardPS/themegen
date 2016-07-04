@@ -69,6 +69,8 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 	cssPath = "orig/css/"
 	themePath = "themes/"
 	htmlWritePath = "new/html/"
+	newThemePath = "new/"
+	zipPath = 'themes/'
 	htmlNames = os.listdir(htmlPath)
 	for file in htmlNames:
 		with open(htmlPath+file,'r') as f:
@@ -86,7 +88,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '                        {% topic_menu_full '+topicSlugs[i]+' "'+topicNames[i]+'" %}\n'
-				i = i +1
+				i = i+1
 			text = text.replace('##',newTopics)
 		elif file == 'calendar.grid.html' or file == 'diary.detail.html' or file == 'diary.list.html':
 			text = text.replace('Calendar',specialPages['calendarName'])
@@ -101,9 +103,27 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['newsParent'], to_lower=True)+' %}">'+specialPages['newsParent']+'</a></li>')
 			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">'+specialPages['newsName']+'</a></li>')
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+		elif file == 'special.brain-builders.html' or file == 'special.english.html' or file == 'special.games.html' or file == 'special.history.html' or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' or file == 'special.maths.html' or file == 'special.science.html' or file == 'special.kidszone.html':
+			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['kidParent'])+' %}">'+specialPages['kidParent']+'</a></li>')
+			text = text.replace('Kids\' Zone',specialPages['kidName'])
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+		elif file == 'special.sitemap.html':
+			text = text.replace('            {% topic_menu_full about-us %}\n','##')
+			text = text.replace('            {% topic_menu_full key-information %}\n','')
+			text = text.replace('            {% topic_menu_full news-and-events %}\n','')
+			text = text.replace('            {% topic_menu_full parents %}\n','')
+			text = text.replace('            {% topic_menu_full children %}\n','')
+			newTopics = ''
+			i = 0
+			while i < len(topicSlugs):
+				newTopics += '            {% topic_menu_full '+topicSlugs[i]+' %}\n'
+				i = i+1
+			text = text.replace('##',newTopics)
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		else:
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		with open(htmlWritePath+file,'w') as f:
 			f.write(text)
-	zipName = "MyTheme.zip"
+	
+	zipName = themeslug+".zip"
 	return zipName
