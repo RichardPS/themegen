@@ -63,6 +63,7 @@ seoText = [
 	"PrimarySite Website Design",
 ]
 calendarWeek = datetime.today().isocalendar()[1]
+zipPath = "themes/"
 
 def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 	htmlPath = "orig/html/"
@@ -70,8 +71,8 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 	themePath = "themes/"
 	htmlWritePath = "new/html/"
 	newThemePath = "new/"
-	zipPath = 'themes/'
 	htmlNames = os.listdir(htmlPath)
+	# edit html files
 	for file in htmlNames:
 		with open(htmlPath+file,'r') as f:
 			text = f.read()
@@ -104,7 +105,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">'+specialPages['newsName']+'</a></li>')
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		elif file == 'special.brain-builders.html' or file == 'special.english.html' or file == 'special.games.html' or file == 'special.history.html' or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' or file == 'special.maths.html' or file == 'special.science.html' or file == 'special.kidszone.html':
-			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['kidParent'])+' %}">'+specialPages['kidParent']+'</a></li>')
+			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['kidParent'], to_lower=True)+' %}">'+specialPages['kidParent']+'</a></li>')
 			text = text.replace('Kids\' Zone',specialPages['kidName'])
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		elif file == 'special.sitemap.html':
@@ -124,6 +125,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		with open(htmlWritePath+file,'w') as f:
 			f.write(text)
+	#edit css files
 	
 	zipName = themeslug+".zip"
 	return zipName

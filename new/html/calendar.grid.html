@@ -1,7 +1,7 @@
 {% extends "MyTheme/base.html" %}
 {% load themer %}
 
-{% block title %}School Diary{% endblock %}
+{% block title %}Events{% endblock %}
 
 {% block styles %}{% endblock %}
 
@@ -9,12 +9,12 @@
 
 {% block header %}{% endblock %}
 
-{% block page_title %}School Diary{% endblock %}
+{% block page_title %}Events{% endblock %}
 
 {% block breadcrumbs %}
     <li><a href="{% home_url %}">Home</a></li>
-    <li><a href="{% topic_url section-six %}">Section Six</a></li>
-    <li><a href="{% url 'diary_grid' year month_number %}">School Diary</a></li>
+    <li><a href="{% topic_url whats-happening %}">Whats Happening</a></li>
+    <li><a href="{% url 'diary_grid' year month_number %}">Events</a></li>
 {% endblock %}
 
 {% block content %}

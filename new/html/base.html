@@ -76,12 +76,10 @@
 
                     <ul>
                         <li class="ps_topic_link home-btn"><a href="{% home_url %}">Home</a></li>
-                        {% topic_menu_full section-one "Section One" %}
-                        {% topic_menu_full section-two "Section Two" %}
-                        {% topic_menu_full section-three "Section Three" %}
-                        {% topic_menu_full section-four "Section Four" %}
-                        {% topic_menu_full section-five "Section Five" %}
-                        {% topic_menu_full section-six "Section Six" %}
+                        {% topic_menu_full something-about-us "Something About Us" %}
+                        {% topic_menu_full whats-happening "Whats Happening" %}
+                        {% topic_menu_full parents-carers "Parents/Carers" %}
+                        {% topic_menu_full pupils "Pupils" %}
 
                         <li class="login-responsive visible-small">
                         {% if user.is_authenticated %}
