@@ -84,34 +84,10 @@
 	"buffers":
 	[
 		{
-			"file": "process.py",
-			"settings":
-			{
-				"buffer_size": 3057,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "editTheme.py",
 			"settings":
 			{
-				"buffer_size": 720,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/process.tpl",
-			"settings":
-			{
-				"buffer_size": 586,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "themegen.py",
-			"settings":
-			{
-				"buffer_size": 445,
+				"buffer_size": 732,
 				"line_ending": "Unix"
 			}
 		}
@@ -140,6 +116,10 @@
 	},
 	"file_history":
 	[
+		"/home/richard/themegen/themegen.py",
+		"/home/richard/themegen/views/process.tpl",
+		"/home/richard/themegen/editTheme.py",
+		"/home/richard/themegen/process.py",
 		"/home/richard/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
 		"/home/richard/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
 		"/home/richard/workProjects/themegen/README.md",
@@ -204,107 +184,29 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "process.py",
+					"file": "editTheme.py",
 					"settings":
 					{
-						"buffer_size": 3057,
+						"buffer_size": 732,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1059,
-								1059
+								732,
+								732
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 495.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "editTheme.py",
-					"settings":
-					{
-						"buffer_size": 720,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								704,
-								704
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/process.tpl",
-					"settings":
-					{
-						"buffer_size": 586,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								586,
-								586
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "themegen.py",
-					"settings":
-					{
-						"buffer_size": 445,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								445,
-								445
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

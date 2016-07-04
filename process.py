@@ -41,7 +41,7 @@ def sitemapProcess(sitemap,themename):
 		'topicSlugs':topicSlugs,
 		}
 	from editTheme import processTheme
-	zipName = processTheme(topicNames,topicSlugs,themeslug)
+	zipName = processTheme(topicNames,topicSlugs,themeslug,specialPages)
 	#return site info dictionary
 	return siteinfo
 
