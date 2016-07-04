@@ -146,12 +146,6 @@ footer {
   background: #add9fe;
 }
 
-.noticeboard iframe {
- 	height: 374px!important;
-  width: 296px!important;
-  min-height: 374px!important;
-}
-
 
 /* Calendar Dates
 ================= */
@@ -188,18 +182,15 @@ footer {
 
 .house-points-list li {}
 
-.housename::before {
-  content: "\2022 ";
-  font-size: 20px;
-  font-size: 2.0rem;
-}
 
 /* Twitter
 ========== */
 .twitter {
   position: absolute;
+  width: 243px;
   top: 467px;
   left: 725px;
+  line-height: 1.5;
 }
 
 .twitter h2 {
