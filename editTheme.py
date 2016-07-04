@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 import os, sys, zipfile
 from datetime import *
+from slugify import slugify
 
 htmlFiles = []
 cssFiles = []
@@ -66,6 +67,7 @@ calendarWeek = datetime.today().isocalendar()[1]
 def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 	htmlPath = "orig/html/"
 	cssPath = "orig/css/"
+	themePath = "themes/"
 	htmlWritePath = "new/html/"
 	htmlNames = os.listdir(htmlPath)
 	for file in htmlNames:
@@ -86,6 +88,19 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 				newTopics += '                        {% topic_menu_full '+topicSlugs[i]+' "'+topicNames[i]+'" %}\n'
 				i = i +1
 			text = text.replace('##',newTopics)
+		elif file == 'calendar.grid.html' or file == 'diary.detail.html' or file == 'diary.list.html':
+			text = text.replace('Calendar',specialPages['calendarName'])
+			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['calendarParent'], to_lower=True)+' %}">'+specialPages['calendarParent']+'</a></li>')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+		elif file == 'special.calendar-breadcrumbs.html':
+			text = text.replace('Calendar',specialPages['calendarName'])
+			text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url '+slugify(specialPages['calendarParent'], to_lower=True)+' %}">'+specialPages['calendarParent']+'</a></li>')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+		elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
+			text = text.replace('Latest News',specialPages['newsName'])
+			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['newsParent'], to_lower=True)+' %}">'+specialPages['newsParent']+'</a></li>')
+			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">'+specialPages['newsName']+'</a></li>')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		else:
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		with open(htmlWritePath+file,'w') as f:

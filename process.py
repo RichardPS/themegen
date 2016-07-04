@@ -14,8 +14,8 @@ specialPages = {
 	"newsName":"Latest News",
 	"letterParent":"News and Events",
 	"letterName":"Newsletters",
-	"calendarParent":"Calendar",
-	"calendarName":"News and Events",
+	"calendarParent":"News and Events",
+	"calendarName":"Calendar",
 	}
 
 #init function
