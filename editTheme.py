@@ -128,100 +128,104 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			f.write(text)
 	# edit css files
 	cssNames = os.listdir(cssPath)
-	for file in cssPath:
+	for file in cssNames:
 		with open(cssPath+file,'r') as f:
 			text = f.read()
 		if file == 'homepage.css':
-			text = text.replace('.main-nav .ps_topic_slug_about-us {}\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children {}\n','')
+			print('homepage.css found')
+			text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children {}\r\n','')
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' {}\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' {}\r\n'
 				i = i+1
 			text = text.replace('##',newTopics)
-		if file == 'style.css':
+		elif file == 'style.css':
+			print('style.css found')
 			# line 129
-			text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n','')
 			newTopics = ''
 			i = 0
 			z = 199
 			p = 52
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' { background-position: 0 -'+p+'px; z-index: '+z+'; }\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' { background-position: 0 -'+str(p)+'px; z-index: '+str(z)+'; }\r\n'
 				i = i+1
 				z = z-1
 				p = p+52
 			text = text.replace('##',newTopics)
 			# line 136
-			text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\r\n','')
 			newTopics = ''
 			i = 0
 			p = 52
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+':focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+':hover { background-position: right -'+p+'px; }\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+':focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+':hover { background-position: right -'+str(p)+'px; }\r\n'
 				i = i+1
 				p = p+52
 			text = text.replace('##',newTopics)
 			# line 204
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul {}\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information ul {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents ul {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children ul {}\r\n','')
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul {}\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul {}\r\n'
 				i = i+1
 			text = text.replace('##',newTopics)
 			# line 225
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul li a {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li a {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li a {}\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information ul li a {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents ul li a {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children ul li a {}\r\n','')
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li a {}\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li a {}\r\n'
 				i = i+1
 			text = text.replace('##',newTopics)
 			#line 241
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\r\n','')
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:hover {}\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:hover {}\r\n'
 				i = i+1
 			text = text.replace('##',newTopics)
 			# line 249
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\n','')
+			text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n','##')
+			text = text.replace('.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\r\n','')
+			text = text.replace('.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\r\n','')
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:hover {}\n'
+				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:hover {}\r\n'
 				i = i+1
 			text = text.replace('##',newTopics)
+		else:
+			text = text
 		with open(cssWritePath+file,'w') as f:
 			f.write(text)
 	zipName = themeslug+".zip"
