@@ -4,6 +4,7 @@ import os, sys, zipfile
 from datetime import *
 from slugify import slugify
 
+# declare global variables
 htmlFiles = []
 cssFiles = []
 seoText = [
@@ -65,6 +66,7 @@ seoText = [
 calendarWeek = datetime.today().isocalendar()[1]
 zipPath = "themes/"
 
+# read/edit/write theme files
 def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 	htmlPath = "orig/html/"
 	cssPath = "orig/css/"
@@ -228,5 +230,6 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text
 		with open(cssWritePath+file,'w') as f:
 			f.write(text)
+	# return theme zip name for download
 	zipName = themeslug+".zip"
 	return zipName

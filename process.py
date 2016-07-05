@@ -3,6 +3,7 @@
 import re
 from slugify import slugify
 
+# declare global variables
 pageScript = []
 topicNames = []
 topicSlugs =[]
@@ -18,7 +19,7 @@ specialPages = {
 	"calendarName":"Calendar",
 	}
 
-#init function
+# init function
 def sitemapProcess(sitemap,themename):
 	#split sitemap to list
 	sitemaparray = sitemap.split('\n')
@@ -45,18 +46,19 @@ def sitemapProcess(sitemap,themename):
 	#return site info dictionary
 	return siteinfo
 
-#create theme name slug
+# create theme name slug
 def slug_theme_name(_themename):
 	#remove all non alpha characters
 	_themeslug = re.sub("[^a-zA-Z]","",_themename)
 	return _themeslug
 
-#find pages (bullet point) and mark with ##
+# find pages (bullet point) and mark with ##
 def markPages(_sitemap):
 	#replace bullet points for ##
 	sitemap = [item.replace('•','##') for item in _sitemap]
 	return sitemap
 
+# loop thgouh sitemap and id topics/pages
 def createPages(_sitemaparray):
 	global pageScript
 	global currentTopic
@@ -73,6 +75,7 @@ def createPages(_sitemaparray):
 			pageScript.extend([currentTopic+'\\'+slugify(currentTopic, to_lower=True)+'||'+processPage(item)])
 	return pageScript
 
+# add elements to special pages for sitemap
 def processPage(input):
 	global specialPages
 
