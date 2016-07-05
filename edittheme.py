@@ -67,7 +67,7 @@ calendarWeek = datetime.today().isocalendar()[1]
 zipPath = "themes/"
 
 # read/edit/write theme files
-def processTheme(topicNames,topicSlugs,themeslug,specialPages):
+def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 	htmlPath = "orig/html/"
 	cssPath = "orig/css/"
 	themePath = "themes/"

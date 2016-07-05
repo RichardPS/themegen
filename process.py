@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 import re
 from slugify import slugify
-from editTheme import processTheme
+from edittheme import processtheme
 
 # declare global variables
 pageScript = []
