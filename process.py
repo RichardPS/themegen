@@ -21,7 +21,7 @@ specialPages = {
 	}
 
 # init function
-def sitemapProcess(sitemap,themename):
+def sitemapProcess(sitemap,themename,nursery):
 	#split sitemap to list
 	sitemaparray = sitemap.split('\n')
 	#remove blank items in list
@@ -33,7 +33,7 @@ def sitemapProcess(sitemap,themename):
 	#generate pagescript
 	createPages(sitemaparray)
 	# call edit theme function in editTheme.py
-	zipName = processTheme(topicNames,topicSlugs,themeslug,specialPages)
+	zipName = processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery)
 	#populate dictionary
 	siteinfo = {
 		'theme_name':themename,
@@ -44,6 +44,7 @@ def sitemapProcess(sitemap,themename):
 		'topicNames':topicNames,
 		'topicSlugs':topicSlugs,
 		'zipName':zipName,
+		'nursery':nursery,
 		}
 	#return site info dictionary
 	return siteinfo

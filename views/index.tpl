@@ -8,8 +8,9 @@
 <body>
 
 <form action="/process" method="post">
-	<textarea name="sitemap" rows="10" cols="50"></textarea><br>
+	<textarea name="sitemap" rows="25" cols="100"></textarea><br>
 	<input name="themename" type="text"><br>
+	<input type="checkbox" name="nursery" value="true">Check if a nursery site<br>
 	<input value="Submit" type="submit">
 </form>
 

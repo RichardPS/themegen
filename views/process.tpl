@@ -5,6 +5,7 @@
 % specialPages = siteinfo['specialPages']
 % topicNames = siteinfo['topicNames']
 % topicSlugs = siteinfo['topicSlugs']
+% nursery = siteinfo['nursery']
 
 {{themename}}
 {{themeslug}}
@@ -29,3 +30,5 @@
 % for item in topicSlugs:
 	{{item}}<br>
 % end
+<hr>
+{{nursery}}

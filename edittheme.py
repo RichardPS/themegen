@@ -7,7 +7,7 @@ from slugify import slugify
 # declare global variables
 htmlFiles = []
 cssFiles = []
-seoText = [
+seoPrimary = [
 	"Designed by PrimarySite",
 	"Design by PrimarySite",
 	"Website by PrimarySite",
@@ -63,11 +63,67 @@ seoText = [
 	"Created by PrimarySite",
 	"PrimarySite Website Design",
 ]
+seoNursery = [
+	"Designed by NurserySite",
+	"Design by NurserySite",
+	"Website by NurserySite",
+	"Web Site by NurserySite",
+	"Web Design by NurserySite",
+	"Website Design by NurserySite",
+	"Website Designed by NurserySite",
+	"Web Site Design by NurserySite",
+	"Web Site Designed by NurserySite",
+	"Websites for schools by NurserySite",
+	"Websites for primary schools by NurserySite",
+	"Nursery School Websites by NurserySite",
+	"Websites for Nursery Schools by NurserySite",
+	"NurserySite School Website Design",
+	"A NurserySite School Website",
+	"A NurserySite School Website Design",
+	"A NurserySite School Web Site",
+	"A NurserySite School Web Site Design",
+	"Unique Websites for schools by NurserySite",
+	"Unique Websites for Unique Schools by NurserySite",
+	"Created by NurserySite",
+	"Created by NurserySite, school website designers",
+	"Created by NurserySite, Nursery school website designers",
+	"NurserySite Website Design",
+	"NurserySite Web Design",
+	"School Website by NurserySite",
+	"School Website from NurserySite",
+	"School Website Design by NurserySite",
+	"School Website Designed by NurserySite",
+	"NurserySite - Websites for Schools",
+	"NurserySite - Websites for Nursery Schools",
+	"NurserySite - School Website Designers",
+	"NurserySite - the School Website Specialists",
+	"NurserySite - School Websites",
+	"NurserySite - Websites for Schools",
+	"NurserySite - Websites for Nursery Schools ",
+	"NurserySite - School Web Site Designers",
+	"NurserySite - the School Web Site Specialists",
+	"NurserySite - School Web Sites",
+	"NurserySite - Web Sites for Schools",
+	"NurserySite - Web Sites for Nursery Schools",
+	"NurserySite - Outstanding School Websites",
+	"NurserySite - Outstanding School Web Sites",
+	"Web Site by NurserySite",
+	"Web Site Design by NurserySite",
+	"Nursery School Websites by NurserySite",
+	"A NurserySite School Website Design",
+	"Unique Websites for Unique Schools by NurserySite",
+	"NurserySite Website Design",
+	"School Website Design by NurserySite",
+	"NurserySite - School Website Designers",
+	"NurserySite - Websites for Nursery Schools",
+	"Created by NurserySite",
+	"NurserySite Website Design",
+]
 calendarWeek = datetime.today().isocalendar()[1]
 zipPath = "themes/"
 
 # read/edit/write theme files
-def processtheme(topicNames,topicSlugs,themeslug,specialPages):
+def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 	htmlPath = "orig/html/"
 	cssPath = "orig/css/"
 	themePath = "themes/"
@@ -87,7 +143,12 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text.replace('                        {% topic_menu_full news-and-events "News and Events" %}\n','')
 			text = text.replace('                        {% topic_menu_full parents "Parents" %}\n','')
 			text = text.replace('                        {% topic_menu_full children "Children" %}\n','')
-			text = text.replace('Website design by PrimarySite',seoText[calendarWeek])
+			# if nursery is true add nurserysite text
+			if nursery:
+				text = text.replace('Website design by PrimarySite',seoNursery[calendarWeek])
+			# else add primarysite text
+			else:
+				text = text.replace('Website design by PrimarySite',seoPrimary[calendarWeek])
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
@@ -134,7 +195,6 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 		with open(cssPath+file,'r') as f:
 			text = f.read()
 		if file == 'homepage.css':
-			print('homepage.css found')
 			text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
 			text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
 			text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
@@ -147,7 +207,6 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 				i = i + 1
 			text = text.replace('##',newTopics)
 		elif file == 'style.css':
-			print('style.css found')
 			# line 129
 			text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
 			text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')

@@ -37,7 +37,8 @@ def index(page_title='Index'):
 def process(page_title='Process'):
 	sitemap = request.forms.get('sitemap')
 	themename = request.forms.get('themename')
-	siteinfo = sitemapProcess(sitemap,themename)
+	nursery = request.forms.get('nursery')
+	siteinfo = sitemapProcess(sitemap,themename,nursery)
 	return dict(siteinfo=siteinfo)
 
 # run host
