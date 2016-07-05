@@ -1,7 +1,7 @@
 # process theme files
 # -*- coding: UTF-8 -*-
-import os, sys, zipfile
-from datetime import *
+import sys, zipfile, os
+from datetime import datetime
 from slugify import slugify
 
 # declare global variables
@@ -92,7 +92,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '                        {% topic_menu_full '+topicSlugs[i]+' "'+topicNames[i]+'" %}\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 		elif file == 'calendar.grid.html' or file == 'diary.detail.html' or file == 'diary.list.html':
 			text = text.replace('Calendar',specialPages['calendarName'])
@@ -121,7 +121,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '            {% topic_menu_full '+topicSlugs[i]+' %}\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		else:
@@ -144,7 +144,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' {}\r\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 		elif file == 'style.css':
 			print('style.css found')
@@ -160,9 +160,9 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			p = 52
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' { background-position: 0 -'+str(p)+'px; z-index: '+str(z)+'; }\r\n'
-				i = i+1
+				i = i + 1
 				z = z-1
-				p = p+52
+				p = p + 52
 			text = text.replace('##',newTopics)
 			# line 136
 			text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n','##')
@@ -175,8 +175,8 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			p = 52
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+':focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+':hover { background-position: right -'+str(p)+'px; }\r\n'
-				i = i+1
-				p = p+52
+				i = i + 1
+				p = p + 52
 			text = text.replace('##',newTopics)
 			# line 204
 			text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\r\n','##')
@@ -188,7 +188,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul {}\r\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 			# line 225
 			text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\r\n','##')
@@ -200,7 +200,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li a {}\r\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 			#line 241
 			text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n','##')
@@ -212,7 +212,7 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:hover {}\r\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 			# line 249
 			text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n','##')
@@ -224,14 +224,15 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			while i < len(topicSlugs):
 				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:hover {}\r\n'
-				i = i+1
+				i = i + 1
 			text = text.replace('##',newTopics)
 		else:
 			text = text
 		with open(cssWritePath+file,'w') as f:
 			f.write(text)
 
-	zipTheme(newThemePath, themePath, themeslug)
+	# zip up theme, currently has root folder :(
+	# zipTheme(newThemePath, themePath, themeslug)
 
 	# return theme zip name for download
 	zipName = themeslug+".zip"

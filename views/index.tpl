@@ -2,7 +2,8 @@
 <html>
 <head>
 <title>{{page_title}}</title>
-
+<link rel="stylesheet" href="style.css" type="text/css">
+<script src="common.js" type="text/javascript"></script>
 </head>
 <body>
 

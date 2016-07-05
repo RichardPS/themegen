@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 import re
 from slugify import slugify
+from editTheme import processTheme
 
 # declare global variables
 pageScript = []
@@ -31,6 +32,8 @@ def sitemapProcess(sitemap,themename):
 	sitemaparray = markPages(sitemaparray)
 	#generate pagescript
 	createPages(sitemaparray)
+	# call edit theme function in editTheme.py
+	zipName = processTheme(topicNames,topicSlugs,themeslug,specialPages)
 	#populate dictionary
 	siteinfo = {
 		'theme_name':themename,
@@ -40,32 +43,31 @@ def sitemapProcess(sitemap,themename):
 		'specialPages':specialPages,
 		'topicNames':topicNames,
 		'topicSlugs':topicSlugs,
+		'zipName':zipName,
 		}
-	from editTheme import processTheme
-	zipName = processTheme(topicNames,topicSlugs,themeslug,specialPages)
 	#return site info dictionary
 	return siteinfo
 
 # create theme name slug
-def slug_theme_name(_themename):
+def slug_theme_name(themename):
 	#remove all non alpha characters
-	_themeslug = re.sub("[^a-zA-Z]","",_themename)
-	return _themeslug
+	themeslug = re.sub("[^a-zA-Z]","",themename)
+	return themeslug
 
-# find pages (bullet point) and mark with ##
-def markPages(_sitemap):
+# find pages (bullet point) and mark with ##, these are pages in a topic
+def markPages(sitemap):
 	#replace bullet points for ##
-	sitemap = [item.replace('•','##') for item in _sitemap]
-	return sitemap
+	markedsitemap = [item.replace('•','##') for item in sitemap]
+	return markedsitemap
 
 # loop thgouh sitemap and id topics/pages
-def createPages(_sitemaparray):
+def createPages(sitemaparray):
 	global pageScript
 	global currentTopic
 	global topicList
 	global topicNames
 	global topicSlugs
-	for item in _sitemaparray:		
+	for item in sitemaparray:		
 		if item[:2] != '##':
 			currentTopic = item.strip()
 			topicNames.extend([currentTopic])
@@ -76,29 +78,28 @@ def createPages(_sitemaparray):
 	return pageScript
 
 # add elements to special pages for sitemap
-def processPage(input):
+def processPage(pageshims):
 	global specialPages
-
-	if "**kids" in input:
+	if "**kids" in pageshims:
 		specialPages["kidParent"] = currentTopic
-		specialPages["kidName"] = input.replace("**kids","")
-		input = input.replace("**kids","**/special/kidszone")
-	elif "**news" in input:
+		specialPages["kidName"] = pageshims.replace("**kids","")
+		pageshims = pageshims.replace("**kids","**/special/kidszone")
+	elif "**news" in pageshims:
 		specialPages["newsParent"] = currentTopic
-		specialPages["newsName"] = input.replace("**news","")
-		input = input.replace("**news","**/stream/news/full/1/-//")
-	elif "**letter" in input:
+		specialPages["newsName"] = pageshims.replace("**news","")
+		pageshims = pageshims.replace("**news","**/stream/news/full/1/-//")
+	elif "**letter" in pageshims:
 		specialPages["letterParent"] = currentTopic
-		specialPages["letterName"] = input.replace("**letter","")
-		input = input.replace("**letter","**/stream/newsletters/full/1/-//")
-	elif "**calendar" in input:
+		specialPages["letterName"] = pageshims.replace("**letter","")
+		pageshims = pageshims.replace("**letter","**/stream/newsletters/full/1/-//")
+	elif "**calendar" in pageshims:
 		specialPages["calendarParent"] = currentTopic
-		specialPages["calendarName"] = input.replace("**calendar","")
-		input = input.replace("**calendar","**calendar_grid")
-	elif "**diary" in input:
+		specialPages["calendarName"] = pageshims.replace("**calendar","")
+		pageshims = pageshims.replace("**calendar","**calendar_grid")
+	elif "**diary" in pageshims:
 		specialPages["calendarParent"] = currentTopic
-		specialPages["calendarName"] = input.replace("**diary","")
-		input = input.replace("**diary","**/diary/list/")
+		specialPages["calendarName"] = pageshims.replace("**diary","")
+		pageshims = pageshims.replace("**diary","**/diary/list/")
 	else:
-		input = input
-	return input
+		pageshims = pageshims
+	return pageshims
