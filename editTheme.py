@@ -230,6 +230,26 @@ def processTheme(topicNames,topicSlugs,themeslug,specialPages):
 			text = text
 		with open(cssWritePath+file,'w') as f:
 			f.write(text)
+
+	zipTheme(newThemePath, themePath, themeslug)
+
 	# return theme zip name for download
 	zipName = themeslug+".zip"
 	return zipName
+
+def zipTheme(folder, themePath, themeName):
+
+	folder = os.path.abspath(folder)
+
+	themeZip = zipfile.ZipFile(themePath+'/'+themeName+'.zip','w')
+
+	themeZip.write(folder, arcname=os.path.basename(folder))
+
+	for foldername, subfolders, filenames in os.walk(folder):
+		# Add the current folder to the ZIP file if not root folder
+		if foldername != folder:
+			themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
+		# Add all the files in this folder to the ZIP file.
+		for filename in filenames:
+			themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+	themeZip.close()
