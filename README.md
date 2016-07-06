@@ -14,23 +14,18 @@ awesome-slugify https://pypi.python.org/pypi/awesome-slugify/1.6.5
 
 New brach, nurseryoption
 
-######Handy git commands
+####Handy git commands
 **Add changed files**
-
 git add <filename>
 
 **commit changes**
-
 git commit -m "description"
 
 **push changes to repo**
-
 git push origin <branchname>
 
 **change branch**
-
 git checkout <branchname>
 
 **check for changes**
-
 git status
