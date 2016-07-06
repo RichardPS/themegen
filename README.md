@@ -28,4 +28,9 @@ git commit -m "description"
 git push origin <branchname>
 
 **change branch**
+
 git checkout <branchname>
+
+**check for changes**
+
+git status
