@@ -295,7 +295,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 			f.write(text)
 
 	# zip up theme, currently has root folder :(
-	# zipTheme(newThemePath, themePath, themeslug)
+	zipTheme(newThemePath, themePath, themeslug)
 
 	# return theme zip name for download
 	zipName = themeslug+".zip"
