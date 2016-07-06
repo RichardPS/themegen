@@ -18,6 +18,8 @@ specialPages = {
 	"letterName":"Newsletters",
 	"calendarParent":"News and Events",
 	"calendarName":"Calendar",
+	"tourParent":"About Us",
+	"tourName":"School Tour",
 	}
 
 # init function
@@ -101,6 +103,10 @@ def processPage(pageshims):
 		specialPages["calendarParent"] = currentTopic
 		specialPages["calendarName"] = pageshims.replace("**diary","")
 		pageshims = pageshims.replace("**diary","**/diary/list/")
+	elif "**tour" in pageshims:
+		specialPages["tourParent"] = currentTopic
+		specialPages["tourName"] = pageshims.replace("**tour","")
+		pageshims = pageshims.replace("**tour","**/special/virtual-tour")
 	else:
 		pageshims = pageshims
 	return pageshims

@@ -185,6 +185,10 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 				i = i + 1
 			text = text.replace('##',newTopics)
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+		elif file == 'special.virtual-tour.html':
+			text = text.replace('    <li><a href="{% topic_url about-us %}">About Us</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['tourParent'], to_lower=True)+' %}">'+specialPages['tourParent']+'</a></li>')
+			text = text.replace('School Tour',specialPages['tourName'])
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		else:
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		with open(htmlWritePath+file,'w') as f:
