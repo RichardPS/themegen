@@ -1,0 +1,6 @@
+// GLOBAL JS FILE
+// ==============
+$(function(){
+
+
+});
