@@ -19,6 +19,10 @@ def image(filename):
 def font(filename):
 	return static_file(filename, root='static/fonts')
 
+@get('/<filename:re:.*\.zip>')
+def zip(filename):
+	return static_file(filename, root='static/themezips')
+
 # custom 404
 @error(404)
 @view('404')
@@ -34,12 +38,12 @@ def index(page_title='Index'):
 # process post from index
 @route('/process', method='post')
 @view('process')
-def process(page_title='Process'):
+def process(page_title='Site Theme Info'):
 	sitemap = request.forms.get('sitemap')
 	themename = request.forms.get('themename')
 	nursery = request.forms.get('nursery')
 	siteinfo = sitemapProcess(sitemap,themename,nursery)
-	return dict(siteinfo=siteinfo)
+	return dict(siteinfo=siteinfo,page_title=page_title)
 
 # run host
 run(host='0.0.0.0', port=8080, debug=True)

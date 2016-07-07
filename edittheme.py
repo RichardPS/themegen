@@ -295,25 +295,31 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 			f.write(text)
 
 	# zip up theme, currently has root folder :(
-	zipTheme(newThemePath, themePath, themeslug)
+	zipTheme(themeslug)
 
 	# return theme zip name for download
 	zipName = themeslug+".zip"
 	return zipName
 
-def zipTheme(folder, themePath, themeName):
+def zipTheme(themeName):
 
-	folder = os.path.relpath(folder)
+	newthemedirs = os.listdir('new')
 
-	themeZip = zipfile.ZipFile(themePath + '/' + themeName + '.zip','w')
+	themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
 
-	#themeZip.write(folder, arcname=os.path.basename(folder))
+	for item in newthemedirs:
+		print item
+		folder = 'new/' + item + '/'
 
-	for foldername, subfolders, filenames in os.walk(folder):
-		# Add the current folder to the ZIP file if not root folder
-		if foldername != folder:
-			themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
-		# Add all the files in this folder to the ZIP file.
-		for filename in filenames:
-			themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+		folder = os.path.relpath(folder)
+
+		#themeZip.write(folder, arcname=os.path.basename(folder))
+
+		for foldername, subfolders, filenames in os.walk(folder):
+			# Add the current folder to the ZIP file if not root folder
+			if foldername != folder:
+				themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
+			# Add all the files in this folder to the ZIP file.
+			for filename in filenames:
+				themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
 	themeZip.close()
