@@ -24,18 +24,21 @@ specialPages = {
 
 # init function
 def sitemapProcess(sitemap,themename,nursery):
+	# clear pageScript list if page resubmitted
+	global pageScript
+	pageScript = []
 	#split sitemap to list
 	sitemaparray = sitemap.split('\n')
 	#remove blank items in list
 	sitemaparray = filter(None, sitemaparray)
 	#call function to generate theme name (no spaces or numbers)
-	themeslug=slug_theme_name(themename)
+	themeslug = slug_theme_name(themename)
 	#call function to replace bullet points for ##
 	sitemaparray = markPages(sitemaparray)
 	#generate pagescript
 	createPages(sitemaparray)
 	# call edit theme function in editTheme.py
-	zipName = processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery)
+	zipName = processtheme(topicNames, topicSlugs, themeslug, specialPages, nursery)
 	#populate dictionary with test variables
 	'''
 	siteinfo = {
@@ -85,7 +88,7 @@ def createPages(sitemaparray):
 			topicSlugs.extend([slugify(currentTopic, to_lower=True)])
 		else:
 			item = re.sub("^[(#\s)]{1,}","",item).strip()
-			pageScript.extend([currentTopic+'\\'+slugify(currentTopic, to_lower=True)+'||'+processPage(item)])
+			pageScript.extend([currentTopic + '\\' + slugify(currentTopic, to_lower=True) + '||' + processPage(item)])
 	return pageScript
 
 # add elements to special pages for sitemap

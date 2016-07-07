@@ -45,5 +45,9 @@ def process(page_title='Site Theme Info'):
 	siteinfo = sitemapProcess(sitemap,themename,nursery)
 	return dict(siteinfo=siteinfo,page_title=page_title)
 
+@route('/process', method='get')
+def processget():
+	redirect('/')
+
 # run host
 run(host='0.0.0.0', port=8080, debug=True)

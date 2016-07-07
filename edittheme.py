@@ -298,7 +298,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 	zipTheme(themeslug)
 
 	# return theme zip name for download
-	zipName = themeslug+".zip"
+	zipName = themeslug + ".zip"
 	return zipName
 
 def zipTheme(themeName):
@@ -308,12 +308,10 @@ def zipTheme(themeName):
 	themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
 
 	for item in newthemedirs:
-		print item
+		#print item
 		folder = 'new/' + item + '/'
 
 		folder = os.path.relpath(folder)
-
-		#themeZip.write(folder, arcname=os.path.basename(folder))
 
 		for foldername, subfolders, filenames in os.walk(folder):
 			# Add the current folder to the ZIP file if not root folder
