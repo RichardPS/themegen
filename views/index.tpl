@@ -22,5 +22,7 @@
 	<li>**letter <span style="padding-left: 25px;">Newsletters (/stream/newsletters/full/1/-//)</span></li>
 	<li>**kids <span style="padding-left: 25px;">Kid's Zone (/special/kidszone)</span></li>
 </ul>
+<br>
+<a href="/generic">Get Build Template</a>
 </body>
 </html>

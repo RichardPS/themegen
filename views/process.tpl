@@ -4,12 +4,12 @@
 % page_title = page_title
 
 {{page_title}}
-
+<hr>
 % for item in pageScript:
 	{{item}}<br>
 % end
 <hr>
 
-<a href="{{zipName}}">Click Here</a>
+<a href="{{zipName}}">Download Theme</a>
 <hr>
 <a href="/">Return Home</a>

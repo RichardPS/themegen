@@ -1,5 +1,6 @@
 from bottle import *
 from process import sitemapProcess
+from generictemplate import buildgeneric
 
 # setup static folder routes
 # javascript
@@ -48,6 +49,11 @@ def process(page_title='Site Theme Info'):
 @route('/process', method='get')
 def processget():
 	redirect('/')
+
+@route('/generic')
+def generic():
+	buildgeneric()
+	redirect('/BuildTemplate.zip')
 
 # run host
 run(host='0.0.0.0', port=8080, debug=True)
