@@ -18,33 +18,45 @@ specialPages = {
 	"letterName":"Newsletters",
 	"calendarParent":"News and Events",
 	"calendarName":"Calendar",
+	"tourParent":"About Us",
+	"tourName":"School Tour",
 	}
 
 # init function
-def sitemapProcess(sitemap,themename):
+def sitemapProcess(sitemap,themename,nursery):
+	# clear pageScript list if page resubmitted
+	global pageScript
+	pageScript = []
 	#split sitemap to list
 	sitemaparray = sitemap.split('\n')
 	#remove blank items in list
 	sitemaparray = filter(None, sitemaparray)
 	#call function to generate theme name (no spaces or numbers)
-	themeslug=slug_theme_name(themename)
+	themeslug = slug_theme_name(themename)
 	#call function to replace bullet points for ##
 	sitemaparray = markPages(sitemaparray)
 	#generate pagescript
 	createPages(sitemaparray)
 	# call edit theme function in editTheme.py
-	zipName = processTheme(topicNames,topicSlugs,themeslug,specialPages)
-	#populate dictionary
+	zipName = processtheme(topicNames, topicSlugs, themeslug, specialPages, nursery)
+	#populate dictionary with test variables
+	#siteinfo = {
+	#	'theme_name':themename,
+	#	'theme_slug':themeslug,
+	#	'site_map':sitemaparray,
+	#	'page_script':pageScript,
+	#	'specialPages':specialPages,
+	#	'topicNames':topicNames,
+	#	'topicSlugs':topicSlugs,
+	#	'zipName':zipName,
+	#	'nursery':nursery,
+	#	}
+	# populate dictionary for live env
 	siteinfo = {
 		'theme_name':themename,
-		'theme_slug':themeslug,
-		'site_map':sitemaparray,
 		'page_script':pageScript,
-		'specialPages':specialPages,
-		'topicNames':topicNames,
-		'topicSlugs':topicSlugs,
 		'zipName':zipName,
-		}
+	}
 	#return site info dictionary
 	return siteinfo
 
@@ -74,7 +86,7 @@ def createPages(sitemaparray):
 			topicSlugs.extend([slugify(currentTopic, to_lower=True)])
 		else:
 			item = re.sub("^[(#\s)]{1,}","",item).strip()
-			pageScript.extend([currentTopic+'\\'+slugify(currentTopic, to_lower=True)+'||'+processPage(item)])
+			pageScript.extend([currentTopic + '\\' + slugify(currentTopic, to_lower=True) + '||' + processPage(item)])
 	return pageScript
 
 # add elements to special pages for sitemap
@@ -100,6 +112,10 @@ def processPage(pageshims):
 		specialPages["calendarParent"] = currentTopic
 		specialPages["calendarName"] = pageshims.replace("**diary","")
 		pageshims = pageshims.replace("**diary","**/diary/list/")
+	elif "**tour" in pageshims:
+		specialPages["tourParent"] = currentTopic
+		specialPages["tourName"] = pageshims.replace("**tour","")
+		pageshims = pageshims.replace("**tour","**/special/virtual-tour")
 	else:
 		pageshims = pageshims
 	return pageshims

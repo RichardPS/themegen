@@ -7,7 +7,7 @@ from slugify import slugify
 # declare global variables
 htmlFiles = []
 cssFiles = []
-seoText = [
+seoPrimary = [
 	"Designed by PrimarySite",
 	"Design by PrimarySite",
 	"Website by PrimarySite",
@@ -63,11 +63,67 @@ seoText = [
 	"Created by PrimarySite",
 	"PrimarySite Website Design",
 ]
+seoNursery = [
+	"Designed by NurserySite",
+	"Design by NurserySite",
+	"Website by NurserySite",
+	"Web Site by NurserySite",
+	"Web Design by NurserySite",
+	"Website Design by NurserySite",
+	"Website Designed by NurserySite",
+	"Web Site Design by NurserySite",
+	"Web Site Designed by NurserySite",
+	"Websites for schools by NurserySite",
+	"Websites for primary schools by NurserySite",
+	"Nursery School Websites by NurserySite",
+	"Websites for Nursery Schools by NurserySite",
+	"NurserySite School Website Design",
+	"A NurserySite School Website",
+	"A NurserySite School Website Design",
+	"A NurserySite School Web Site",
+	"A NurserySite School Web Site Design",
+	"Unique Websites for schools by NurserySite",
+	"Unique Websites for Unique Schools by NurserySite",
+	"Created by NurserySite",
+	"Created by NurserySite, school website designers",
+	"Created by NurserySite, Nursery school website designers",
+	"NurserySite Website Design",
+	"NurserySite Web Design",
+	"School Website by NurserySite",
+	"School Website from NurserySite",
+	"School Website Design by NurserySite",
+	"School Website Designed by NurserySite",
+	"NurserySite - Websites for Schools",
+	"NurserySite - Websites for Nursery Schools",
+	"NurserySite - School Website Designers",
+	"NurserySite - the School Website Specialists",
+	"NurserySite - School Websites",
+	"NurserySite - Websites for Schools",
+	"NurserySite - Websites for Nursery Schools ",
+	"NurserySite - School Web Site Designers",
+	"NurserySite - the School Web Site Specialists",
+	"NurserySite - School Web Sites",
+	"NurserySite - Web Sites for Schools",
+	"NurserySite - Web Sites for Nursery Schools",
+	"NurserySite - Outstanding School Websites",
+	"NurserySite - Outstanding School Web Sites",
+	"Web Site by NurserySite",
+	"Web Site Design by NurserySite",
+	"Nursery School Websites by NurserySite",
+	"A NurserySite School Website Design",
+	"Unique Websites for Unique Schools by NurserySite",
+	"NurserySite Website Design",
+	"School Website Design by NurserySite",
+	"NurserySite - School Website Designers",
+	"NurserySite - Websites for Nursery Schools",
+	"Created by NurserySite",
+	"NurserySite Website Design",
+]
 calendarWeek = datetime.today().isocalendar()[1]
 zipPath = "themes/"
 
 # read/edit/write theme files
-def processtheme(topicNames,topicSlugs,themeslug,specialPages):
+def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
 	htmlPath = "orig/html/"
 	cssPath = "orig/css/"
 	themePath = "themes/"
@@ -80,37 +136,42 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 		with open(htmlPath+file,'r') as f:
 			text = f.read()
 		if file == 'core.homepage.html':
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		elif file == 'base.html':
 			text = text.replace('                        {% topic_menu_full about-us "About Us" %}\n','##')
 			text = text.replace('                        {% topic_menu_full key-information "Key Information" %}\n','')
 			text = text.replace('                        {% topic_menu_full news-and-events "News and Events" %}\n','')
 			text = text.replace('                        {% topic_menu_full parents "Parents" %}\n','')
 			text = text.replace('                        {% topic_menu_full children "Children" %}\n','')
-			text = text.replace('Website design by PrimarySite',seoText[calendarWeek])
+			# if nursery is true add nurserysite text
+			if nursery:
+				text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://www.nurserysite.co.uk/">' + seoNursery[calendarWeek])
+			# else add primarysite text
+			else:
+				text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://primarysite.net/">' + seoPrimary[calendarWeek])
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '                        {% topic_menu_full '+topicSlugs[i]+' "'+topicNames[i]+'" %}\n'
+				newTopics += '                        {% topic_menu_full ' + topicSlugs[i] + ' "' + topicNames[i] + '" %}\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 		elif file == 'calendar.grid.html' or file == 'diary.detail.html' or file == 'diary.list.html':
 			text = text.replace('Calendar',specialPages['calendarName'])
-			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['calendarParent'], to_lower=True)+' %}">'+specialPages['calendarParent']+'</a></li>')
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['calendarParent'], to_lower=True) + ' %}">' + specialPages['calendarParent'] + '</a></li>')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		elif file == 'special.calendar-breadcrumbs.html':
 			text = text.replace('Calendar',specialPages['calendarName'])
-			text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url '+slugify(specialPages['calendarParent'], to_lower=True)+' %}">'+specialPages['calendarParent']+'</a></li>')
+			text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url ' + slugify(specialPages['calendarParent'], to_lower=True) + ' %}">' + specialPages['calendarParent'] + '</a></li>')
 			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
 		elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
 			text = text.replace('Latest News',specialPages['newsName'])
-			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['newsParent'], to_lower=True)+' %}">'+specialPages['newsParent']+'</a></li>')
-			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">'+specialPages['newsName']+'</a></li>')
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['newsParent'], to_lower=True) + ' %}">' + specialPages['newsParent'] + '</a></li>')
+			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">' + specialPages['newsName'] + '</a></li>')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		elif file == 'special.brain-builders.html' or file == 'special.english.html' or file == 'special.games.html' or file == 'special.history.html' or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' or file == 'special.maths.html' or file == 'special.science.html' or file == 'special.kidszone.html':
-			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url '+slugify(specialPages['kidParent'], to_lower=True)+' %}">'+specialPages['kidParent']+'</a></li>')
+			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['kidParent'], to_lower=True) + ' %}">' + specialPages['kidParent'] + '</a></li>')
 			text = text.replace('Kids\' Zone',specialPages['kidName'])
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		elif file == 'special.sitemap.html':
 			text = text.replace('            {% topic_menu_full about-us %}\n','##')
 			text = text.replace('            {% topic_menu_full key-information %}\n','')
@@ -120,12 +181,16 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '            {% topic_menu_full '+topicSlugs[i]+' %}\n'
+				newTopics += '            {% topic_menu_full ' + topicSlugs[i] + ' %}\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+		elif file == 'special.virtual-tour.html':
+			text = text.replace('    <li><a href="{% topic_url about-us %}">About Us</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['tourParent'], to_lower=True) + ' %}">' + specialPages['tourParent'] + '</a></li>')
+			text = text.replace('School Tour',specialPages['tourName'])
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		else:
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
 		with open(htmlWritePath+file,'w') as f:
 			f.write(text)
 	# edit css files
@@ -134,7 +199,6 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 		with open(cssPath+file,'r') as f:
 			text = f.read()
 		if file == 'homepage.css':
-			print('homepage.css found')
 			text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
 			text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
 			text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
@@ -143,11 +207,10 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' {}\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' {}\r\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 		elif file == 'style.css':
-			print('style.css found')
 			# line 129
 			text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
 			text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')
@@ -159,7 +222,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			z = 199
 			p = 52
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' { background-position: 0 -'+str(p)+'px; z-index: '+str(z)+'; }\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' { background-position: 0 -' + str(p) + 'px; z-index: ' + str(z) + '; }\r\n'
 				i = i + 1
 				z = z-1
 				p = p + 52
@@ -174,7 +237,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			i = 0
 			p = 52
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+':focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+':hover { background-position: right -'+str(p)+'px; }\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ':focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ':hover { background-position: right -' + str(p) + 'px; }\r\n'
 				i = i + 1
 				p = p + 52
 			text = text.replace('##',newTopics)
@@ -187,7 +250,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul {}\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul {}\r\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 			# line 225
@@ -199,7 +262,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li a {}\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li a {}\r\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 			#line 241
@@ -211,7 +274,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul li:hover {}\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li:focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li:hover {}\r\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 			# line 249
@@ -223,7 +286,7 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			newTopics = ''
 			i = 0
 			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:focus, .main-nav .ps_topic_slug_'+topicSlugs[i]+' ul a:hover {}\r\n'
+				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul a:focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul a:hover {}\r\n'
 				i = i + 1
 			text = text.replace('##',newTopics)
 		else:
@@ -232,25 +295,29 @@ def processtheme(topicNames,topicSlugs,themeslug,specialPages):
 			f.write(text)
 
 	# zip up theme, currently has root folder :(
-	# zipTheme(newThemePath, themePath, themeslug)
+	zipTheme(themeslug)
 
 	# return theme zip name for download
-	zipName = themeslug+".zip"
+	zipName = themeslug + ".zip"
 	return zipName
 
-def zipTheme(folder, themePath, themeName):
+def zipTheme(themeName):
 
-	folder = os.path.abspath(folder)
+	newthemedirs = os.listdir('new')
 
-	themeZip = zipfile.ZipFile(themePath+'/'+themeName+'.zip','w')
+	themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
 
-	themeZip.write(folder, arcname=os.path.basename(folder))
+	for item in newthemedirs:
+		#print item
+		folder = 'new/' + item + '/'
 
-	for foldername, subfolders, filenames in os.walk(folder):
-		# Add the current folder to the ZIP file if not root folder
-		if foldername != folder:
-			themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
-		# Add all the files in this folder to the ZIP file.
-		for filename in filenames:
-			themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+		folder = os.path.relpath(folder)
+
+		for foldername, subfolders, filenames in os.walk(folder):
+			# Add the current folder to the ZIP file if not root folder
+			if foldername != folder:
+				themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
+			# Add all the files in this folder to the ZIP file.
+			for filename in filenames:
+				themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
 	themeZip.close()

@@ -1,5 +1,6 @@
 from bottle import *
 from process import sitemapProcess
+from generictemplate import buildgeneric
 
 # setup static folder routes
 # javascript
@@ -19,6 +20,10 @@ def image(filename):
 def font(filename):
 	return static_file(filename, root='static/fonts')
 
+@get('/<filename:re:.*\.zip>')
+def zip(filename):
+	return static_file(filename, root='static/themezips')
+
 # custom 404
 @error(404)
 @view('404')
@@ -34,11 +39,21 @@ def index(page_title='Index'):
 # process post from index
 @route('/process', method='post')
 @view('process')
-def process(page_title='Process'):
+def process(page_title='Site Theme Info'):
 	sitemap = request.forms.get('sitemap')
 	themename = request.forms.get('themename')
-	siteinfo = sitemapProcess(sitemap,themename)
-	return dict(siteinfo=siteinfo)
+	nursery = request.forms.get('nursery')
+	siteinfo = sitemapProcess(sitemap,themename,nursery)
+	return dict(siteinfo=siteinfo,page_title=page_title)
+
+@route('/process', method='get')
+def processget():
+	redirect('/')
+
+@route('/generic')
+def generic():
+	buildgeneric()
+	redirect('/BuildTemplate.zip')
 
 # run host
 run(host='0.0.0.0', port=8080, debug=True)
