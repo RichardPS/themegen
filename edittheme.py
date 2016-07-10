@@ -1,323 +1,329 @@
 # process theme files
 # -*- coding: UTF-8 -*-
-import sys, zipfile, os
+import sys
+import zipfile
+import os
 from datetime import datetime
 from slugify import slugify
 
 # declare global variables
-htmlFiles = []
-cssFiles = []
-seoPrimary = [
-	"Designed by PrimarySite",
-	"Design by PrimarySite",
-	"Website by PrimarySite",
-	"Web Site by PrimarySite",
-	"Web Design by PrimarySite",
-	"Website Design by PrimarySite",
-	"Website Designed by PrimarySite",
-	"Web Site Design by PrimarySite",
-	"Web Site Designed by PrimarySite",
-	"Websites for schools by PrimarySite",
-	"Websites for primary schools by PrimarySite",
-	"Primary School Websites by PrimarySite",
-	"Websites for Primary Schools by PrimarySite",
-	"PrimarySite School Website Design",
-	"A PrimarySite School Website",
-	"A PrimarySite School Website Design",
-	"A PrimarySite School Web Site",
-	"A PrimarySite School Web Site Design",
-	"Unique Websites for schools by PrimarySite",
-	"Unique Websites for Unique Schools by PrimarySite",
-	"Created by PrimarySite",
-	"Created by PrimarySite, school website designers",
-	"Created by PrimarySite, primary school website designers",
-	"PrimarySite Website Design",
-	"PrimarySite Web Design",
-	"School Website by PrimarySite",
-	"School Website from PrimarySite",
-	"School Website Design by PrimarySite",
-	"School Website Designed by PrimarySite",
-	"PrimarySite - Websites for Schools",
-	"PrimarySite - Websites for Primary Schools",
-	"PrimarySite - School Website Designers",
-	"PrimarySite - the School Website Specialists",
-	"PrimarySite - School Websites",
-	"PrimarySite - Websites for Schools",
-	"PrimarySite - Websites for Primary Schools ",
-	"PrimarySite - School Web Site Designers",
-	"PrimarySite - the School Web Site Specialists",
-	"PrimarySite - School Web Sites",
-	"PrimarySite - Web Sites for Schools",
-	"PrimarySite - Web Sites for Primary Schools",
-	"PrimarySite - Outstanding School Websites",
-	"PrimarySite - Outstanding School Web Sites",
-	"Web Site by PrimarySite",
-	"Web Site Design by PrimarySite",
-	"Primary School Websites by PrimarySite",
-	"A PrimarySite School Website Design",
-	"Unique Websites for Unique Schools by PrimarySite",
-	"PrimarySite Website Design",
-	"School Website Design by PrimarySite",
-	"PrimarySite - School Website Designers",
-	"PrimarySite - Websites for Primary Schools",
-	"Created by PrimarySite",
-	"PrimarySite Website Design",
+SEOPRIMARY = [
+    "Designed by PrimarySite",
+    "Design by PrimarySite",
+    "Website by PrimarySite",
+    "Web Site by PrimarySite",
+    "Web Design by PrimarySite",
+    "Website Design by PrimarySite",
+    "Website Designed by PrimarySite",
+    "Web Site Design by PrimarySite",
+    "Web Site Designed by PrimarySite",
+    "Websites for schools by PrimarySite",
+    "Websites for primary schools by PrimarySite",
+    "Primary School Websites by PrimarySite",
+    "Websites for Primary Schools by PrimarySite",
+    "PrimarySite School Website Design",
+    "A PrimarySite School Website",
+    "A PrimarySite School Website Design",
+    "A PrimarySite School Web Site",
+    "A PrimarySite School Web Site Design",
+    "Unique Websites for schools by PrimarySite",
+    "Unique Websites for Unique Schools by PrimarySite",
+    "Created by PrimarySite",
+    "Created by PrimarySite, school website designers",
+    "Created by PrimarySite, primary school website designers",
+    "PrimarySite Website Design",
+    "PrimarySite Web Design",
+    "School Website by PrimarySite",
+    "School Website from PrimarySite",
+    "School Website Design by PrimarySite",
+    "School Website Designed by PrimarySite",
+    "PrimarySite - Websites for Schools",
+    "PrimarySite - Websites for Primary Schools",
+    "PrimarySite - School Website Designers",
+    "PrimarySite - the School Website Specialists",
+    "PrimarySite - School Websites",
+    "PrimarySite - Websites for Schools",
+    "PrimarySite - Websites for Primary Schools ",
+    "PrimarySite - School Web Site Designers",
+    "PrimarySite - the School Web Site Specialists",
+    "PrimarySite - School Web Sites",
+    "PrimarySite - Web Sites for Schools",
+    "PrimarySite - Web Sites for Primary Schools",
+    "PrimarySite - Outstanding School Websites",
+    "PrimarySite - Outstanding School Web Sites",
+    "Web Site by PrimarySite",
+    "Web Site Design by PrimarySite",
+    "Primary School Websites by PrimarySite",
+    "A PrimarySite School Website Design",
+    "Unique Websites for Unique Schools by PrimarySite",
+    "PrimarySite Website Design",
+    "School Website Design by PrimarySite",
+    "PrimarySite - School Website Designers",
+    "PrimarySite - Websites for Primary Schools",
+    "Created by PrimarySite",
+    "PrimarySite Website Design",
 ]
-seoNursery = [
-	"Designed by NurserySite",
-	"Design by NurserySite",
-	"Website by NurserySite",
-	"Web Site by NurserySite",
-	"Web Design by NurserySite",
-	"Website Design by NurserySite",
-	"Website Designed by NurserySite",
-	"Web Site Design by NurserySite",
-	"Web Site Designed by NurserySite",
-	"Websites for schools by NurserySite",
-	"Websites for primary schools by NurserySite",
-	"Nursery School Websites by NurserySite",
-	"Websites for Nursery Schools by NurserySite",
-	"NurserySite School Website Design",
-	"A NurserySite School Website",
-	"A NurserySite School Website Design",
-	"A NurserySite School Web Site",
-	"A NurserySite School Web Site Design",
-	"Unique Websites for schools by NurserySite",
-	"Unique Websites for Unique Schools by NurserySite",
-	"Created by NurserySite",
-	"Created by NurserySite, school website designers",
-	"Created by NurserySite, Nursery school website designers",
-	"NurserySite Website Design",
-	"NurserySite Web Design",
-	"School Website by NurserySite",
-	"School Website from NurserySite",
-	"School Website Design by NurserySite",
-	"School Website Designed by NurserySite",
-	"NurserySite - Websites for Schools",
-	"NurserySite - Websites for Nursery Schools",
-	"NurserySite - School Website Designers",
-	"NurserySite - the School Website Specialists",
-	"NurserySite - School Websites",
-	"NurserySite - Websites for Schools",
-	"NurserySite - Websites for Nursery Schools ",
-	"NurserySite - School Web Site Designers",
-	"NurserySite - the School Web Site Specialists",
-	"NurserySite - School Web Sites",
-	"NurserySite - Web Sites for Schools",
-	"NurserySite - Web Sites for Nursery Schools",
-	"NurserySite - Outstanding School Websites",
-	"NurserySite - Outstanding School Web Sites",
-	"Web Site by NurserySite",
-	"Web Site Design by NurserySite",
-	"Nursery School Websites by NurserySite",
-	"A NurserySite School Website Design",
-	"Unique Websites for Unique Schools by NurserySite",
-	"NurserySite Website Design",
-	"School Website Design by NurserySite",
-	"NurserySite - School Website Designers",
-	"NurserySite - Websites for Nursery Schools",
-	"Created by NurserySite",
-	"NurserySite Website Design",
+SEONURSERY = [
+    "Designed by NurserySite",
+    "Design by NurserySite",
+    "Website by NurserySite",
+    "Web Site by NurserySite",
+    "Web Design by NurserySite",
+    "Website Design by NurserySite",
+    "Website Designed by NurserySite",
+    "Web Site Design by NurserySite",
+    "Web Site Designed by NurserySite",
+    "Websites for schools by NurserySite",
+    "Websites for primary schools by NurserySite",
+    "Nursery School Websites by NurserySite",
+    "Websites for Nursery Schools by NurserySite",
+    "NurserySite School Website Design",
+    "A NurserySite School Website",
+    "A NurserySite School Website Design",
+    "A NurserySite School Web Site",
+    "A NurserySite School Web Site Design",
+    "Unique Websites for schools by NurserySite",
+    "Unique Websites for Unique Schools by NurserySite",
+    "Created by NurserySite",
+    "Created by NurserySite, school website designers",
+    "Created by NurserySite, Nursery school website designers",
+    "NurserySite Website Design",
+    "NurserySite Web Design",
+    "School Website by NurserySite",
+    "School Website from NurserySite",
+    "School Website Design by NurserySite",
+    "School Website Designed by NurserySite",
+    "NurserySite - Websites for Schools",
+    "NurserySite - Websites for Nursery Schools",
+    "NurserySite - School Website Designers",
+    "NurserySite - the School Website Specialists",
+    "NurserySite - School Websites",
+    "NurserySite - Websites for Schools",
+    "NurserySite - Websites for Nursery Schools ",
+    "NurserySite - School Web Site Designers",
+    "NurserySite - the School Web Site Specialists",
+    "NurserySite - School Web Sites",
+    "NurserySite - Web Sites for Schools",
+    "NurserySite - Web Sites for Nursery Schools",
+    "NurserySite - Outstanding School Websites",
+    "NurserySite - Outstanding School Web Sites",
+    "Web Site by NurserySite",
+    "Web Site Design by NurserySite",
+    "Nursery School Websites by NurserySite",
+    "A NurserySite School Website Design",
+    "Unique Websites for Unique Schools by NurserySite",
+    "NurserySite Website Design",
+    "School Website Design by NurserySite",
+    "NurserySite - School Website Designers",
+    "NurserySite - Websites for Nursery Schools",
+    "Created by NurserySite",
+    "NurserySite Website Design",
 ]
-calendarWeek = datetime.today().isocalendar()[1]
-zipPath = "themes/"
+calendarweek = datetime.today().isocalendar()[1]
 
 # read/edit/write theme files
-def processtheme(topicNames,topicSlugs,themeslug,specialPages,nursery):
-	htmlPath = "orig/html/"
-	cssPath = "orig/css/"
-	themePath = "themes/"
-	htmlWritePath = "new/html/"
-	cssWritePath = "new/css/"
-	newThemePath = "new/"
-	# edit html files
-	htmlNames = os.listdir(htmlPath)
-	for file in htmlNames:
-		with open(htmlPath+file,'r') as f:
-			text = f.read()
-		if file == 'core.homepage.html':
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		elif file == 'base.html':
-			text = text.replace('                        {% topic_menu_full about-us "About Us" %}\n','##')
-			text = text.replace('                        {% topic_menu_full key-information "Key Information" %}\n','')
-			text = text.replace('                        {% topic_menu_full news-and-events "News and Events" %}\n','')
-			text = text.replace('                        {% topic_menu_full parents "Parents" %}\n','')
-			text = text.replace('                        {% topic_menu_full children "Children" %}\n','')
-			# if nursery is true add nurserysite text
-			if nursery:
-				text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://www.nurserysite.co.uk/">' + seoNursery[calendarWeek])
-			# else add primarysite text
-			else:
-				text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://primarysite.net/">' + seoPrimary[calendarWeek])
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '                        {% topic_menu_full ' + topicSlugs[i] + ' "' + topicNames[i] + '" %}\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-		elif file == 'calendar.grid.html' or file == 'diary.detail.html' or file == 'diary.list.html':
-			text = text.replace('Calendar',specialPages['calendarName'])
-			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['calendarParent'], to_lower=True) + ' %}">' + specialPages['calendarParent'] + '</a></li>')
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		elif file == 'special.calendar-breadcrumbs.html':
-			text = text.replace('Calendar',specialPages['calendarName'])
-			text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url ' + slugify(specialPages['calendarParent'], to_lower=True) + ' %}">' + specialPages['calendarParent'] + '</a></li>')
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
-		elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
-			text = text.replace('Latest News',specialPages['newsName'])
-			text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['newsParent'], to_lower=True) + ' %}">' + specialPages['newsParent'] + '</a></li>')
-			text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">' + specialPages['newsName'] + '</a></li>')
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		elif file == 'special.brain-builders.html' or file == 'special.english.html' or file == 'special.games.html' or file == 'special.history.html' or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' or file == 'special.maths.html' or file == 'special.science.html' or file == 'special.kidszone.html':
-			text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['kidParent'], to_lower=True) + ' %}">' + specialPages['kidParent'] + '</a></li>')
-			text = text.replace('Kids\' Zone',specialPages['kidName'])
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		elif file == 'special.sitemap.html':
-			text = text.replace('            {% topic_menu_full about-us %}\n','##')
-			text = text.replace('            {% topic_menu_full key-information %}\n','')
-			text = text.replace('            {% topic_menu_full news-and-events %}\n','')
-			text = text.replace('            {% topic_menu_full parents %}\n','')
-			text = text.replace('            {% topic_menu_full children %}\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '            {% topic_menu_full ' + topicSlugs[i] + ' %}\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		elif file == 'special.virtual-tour.html':
-			text = text.replace('    <li><a href="{% topic_url about-us %}">About Us</a></li>','    <li><a href="{% topic_url ' + slugify(specialPages['tourParent'], to_lower=True) + ' %}">' + specialPages['tourParent'] + '</a></li>')
-			text = text.replace('School Tour',specialPages['tourName'])
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		else:
-			text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
-		with open(htmlWritePath+file,'w') as f:
-			f.write(text)
-	# edit css files
-	cssNames = os.listdir(cssPath)
-	for file in cssNames:
-		with open(cssPath+file,'r') as f:
-			text = f.read()
-		if file == 'homepage.css':
-			text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children {}\r\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' {}\r\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-		elif file == 'style.css':
-			# line 129
-			text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n','')
-			newTopics = ''
-			i = 0
-			z = 199
-			p = 52
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' { background-position: 0 -' + str(p) + 'px; z-index: ' + str(z) + '; }\r\n'
-				i = i + 1
-				z = z-1
-				p = p + 52
-			text = text.replace('##',newTopics)
-			# line 136
-			text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\r\n','')
-			newTopics = ''
-			i = 0
-			p = 52
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ':focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ':hover { background-position: right -' + str(p) + 'px; }\r\n'
-				i = i + 1
-				p = p + 52
-			text = text.replace('##',newTopics)
-			# line 204
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul {}\r\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul {}\r\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-			# line 225
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul li a {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li a {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li a {}\r\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li a {}\r\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-			#line 241
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\r\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li:focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul li:hover {}\r\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-			# line 249
-			text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n','##')
-			text = text.replace('.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\r\n','')
-			text = text.replace('.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\r\n','')
-			newTopics = ''
-			i = 0
-			while i < len(topicSlugs):
-				newTopics += '.main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul a:focus, .main-nav .ps_topic_slug_' + topicSlugs[i] + ' ul a:hover {}\r\n'
-				i = i + 1
-			text = text.replace('##',newTopics)
-		else:
-			text = text
-		with open(cssWritePath+file,'w') as f:
-			f.write(text)
+def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
+    htmlpath = "orig/html/"
+    csspath = "orig/css/"
+    themepath = "themes/"
+    htmlwritepath = "new/html/"
+    csswritepath = "new/css/"
+    newthemepath = "new/"
+    # edit html files
+    htmlnames = os.listdir(htmlpath)
+    for file in htmlnames:
+        with open(htmlpath+file,'r') as f:
+            text = f.read()
+        if file == 'core.homepage.html':
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        elif file == 'base.html':
+            text = text.replace('                        {% topic_menu_full about-us "About Us" %}\r\n','##')
+            text = text.replace('                        {% topic_menu_full key-information "Key Information" %}\r\n','')
+            text = text.replace('                        {% topic_menu_full news-and-events "News and Events" %}\r\n','')
+            text = text.replace('                        {% topic_menu_full parents "Parents" %}\r\n','')
+            text = text.replace('                        {% topic_menu_full children "Children" %}\r\n','')
+            # if nursery is true add nurserysite text
+            if nursery:
+                text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek])
+            # else add primarysite text
+            else:
+                text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek])
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '                        {% topic_menu_full ' + topicslugs[i] + ' "' + topicnames[i] + '" %}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+        elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
+            or file == 'diary.list.html':
+            text = text.replace('Calendar',specialpages['calendarName'])
+            text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        elif file == 'special.calendar-breadcrumbs.html':
+            text = text.replace('Calendar',specialpages['calendarName'])
+            text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+        elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
+            text = text.replace('Latest News',specialpages['newsName'])
+            text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['newsParent'], to_lower=True) + ' %}">' + specialpages['newsParent'] + '</a></li>')
+            text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">' + specialpages['newsName'] + '</a></li>')
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        elif file == 'special.brain-builders.html' or file == 'special.english.html' \
+            or file == 'special.games.html' or file == 'special.history.html' \
+            or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' \
+            or file == 'special.maths.html' or file == 'special.science.html' \
+            or file == 'special.kidszone.html':
+            text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['kidParent'], to_lower=True) + ' %}">' + specialpages['kidParent'] + '</a></li>')
+            text = text.replace('Kids\' Zone',specialpages['kidName'])
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        elif file == 'special.sitemap.html':
+            text = text.replace('            {% topic_menu_full about-us %}\r\n','##')
+            text = text.replace('            {% topic_menu_full key-information %}\r\n','')
+            text = text.replace('            {% topic_menu_full news-and-events %}\r\n','')
+            text = text.replace('            {% topic_menu_full parents %}\r\n','')
+            text = text.replace('            {% topic_menu_full children %}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '            {% topic_menu_full ' + topicslugs[i] + ' %}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        elif file == 'special.virtual-tour.html':
+            text = text.replace('    <li><a href="{% topic_url about-us %}">About Us</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['tourParent'], to_lower=True) + ' %}">' + specialpages['tourParent'] + '</a></li>')
+            text = text.replace('School Tour',specialpages['tourName'])
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        else:
+            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+        with open(htmlwritepath+file,'w') as f:
+            f.write(text)
+    # edit css files
+    cssnames = os.listdir(csspath)
+    for file in cssnames:
+        with open(csspath+file,'r') as f:
+            text = f.read()
+        if file == 'homepage.css':
+            text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children {}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' {}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+        elif file == 'style.css':
+            # line 129
+            text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n','')
+            newtopics = ''
+            i = 0
+            z = 199
+            p = 52
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' { background-position: 0 -' + str(p) + 'px; z-index: ' + str(z) + '; }\r\n'
+                i = i + 1
+                z = z-1
+                p = p + 52
+            text = text.replace('##',newtopics)
+            # line 136
+            text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\r\n','')
+            newtopics = ''
+            i = 0
+            p = 52
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ':focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ':hover { background-position: right -' + str(p) + 'px; }\r\n'
+                i = i + 1
+                p = p + 52
+            text = text.replace('##',newtopics)
+            # line 204
+            text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information ul {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents ul {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children ul {}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul {}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+            # line 225
+            text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information ul li a {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents ul li a {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children ul li a {}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li a {}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+            #line 241
+            text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li:focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li:hover {}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+            # line 249
+            text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n','##')
+            text = text.replace('.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\r\n','')
+            text = text.replace('.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\r\n','')
+            newtopics = ''
+            i = 0
+            while i < len(topicslugs):
+                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul a:focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ' ul a:hover {}\r\n'
+                i = i + 1
+            text = text.replace('##',newtopics)
+        else:
+            text = text
+        with open(csswritepath+file,'w') as f:
+            f.write(text)
 
-	# zip up theme, currently has root folder :(
-	zipTheme(themeslug)
+    # zip up theme, currently has root folder :(
+    ziptheme(themeslug)
 
-	# return theme zip name for download
-	zipName = themeslug + ".zip"
-	return zipName
+    # return theme zip name for download
+    zipname = themeslug + ".zip"
+    return zipname
 
-def zipTheme(themeName):
+def ziptheme(themename):
 
-	newthemedirs = os.listdir('new')
+    newthemedirs = os.listdir('new')
 
-	themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
+    themeZip = zipfile.ZipFile('static/themezips/' + themename + '.zip','w')
 
-	for item in newthemedirs:
-		#print item
-		folder = 'new/' + item + '/'
+    for item in newthemedirs:
+        #print item
+        folder = 'new/' + item + '/'
 
-		folder = os.path.relpath(folder)
+        folder = os.path.relpath(folder)
 
-		for foldername, subfolders, filenames in os.walk(folder):
-			# Add the current folder to the ZIP file if not root folder
-			if foldername != folder:
-				themeZip.write(foldername, arcname=os.path.relpath(foldername, os.path.dirname(folder)))
-			# Add all the files in this folder to the ZIP file.
-			for filename in filenames:
-				themeZip.write(os.path.join(foldername, filename), arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
-	themeZip.close()
+        for foldername, subfolders, filenames in os.walk(folder):
+            # Add the current folder to the ZIP file if not root folder
+            if foldername != folder:
+                themeZip.write(foldername,
+                    arcname=os.path.relpath(foldername, os.path.dirname(folder)))
+            # Add all the files in this folder to the ZIP file.
+            for filename in filenames:
+                themeZip.write(os.path.join(foldername, filename),
+                    arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+    themeZip.close()

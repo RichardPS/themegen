@@ -10,7 +10,7 @@ from bottle import view
 
 # Local
 from generictemplate import buildgeneric
-from process import sitemapProcess
+from process import sitemapprocess
 
 
 @get('/<filename:re:.*\.js>')
@@ -64,7 +64,7 @@ def process(page_title='Site Theme Info'):
     sitemap = request.forms.get('sitemap')
     themename = request.forms.get('themename')
     nursery = request.forms.get('nursery')
-    siteinfo = sitemapProcess(sitemap, themename, nursery)
+    siteinfo = sitemapprocess(sitemap, themename, nursery)
     return dict(siteinfo=siteinfo, page_title=page_title)
 
 
