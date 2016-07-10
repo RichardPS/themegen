@@ -1,0 +1,26 @@
+{% extends "BuildTemplate/base.html" %}
+{% load themer %}
+
+{% block title %}School Tour{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}School Tour{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% home_url %}">Home</a></li>
+    <li><a href="{% topic_url about-us %}">About Us</a></li>
+    <li><a href="{% special_page_url virtual-tour %}">School Tour</a></li>
+{% endblock %}
+
+{% block content %}
+    <iframe class="virtual-tour" src="{% virtual_tour_link 'BuildTemplate' %}"></iframe>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}

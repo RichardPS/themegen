@@ -1,0 +1,128 @@
+{% load edit_tags auth_tags rollout_tags assets themer %}
+<!DOCTYPE html>
+{% html_opener "responsive" %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+        <meta name="keywords" content="{% site_name %}">
+        <meta name="description" content="{% site_name %}">
+
+        <title>{% block title %}{% endblock %} | {% site_name %}</title>
+
+        {% include "core/templates/presenter_prologue.html" %}
+
+        {# ICONS #}
+        <link rel="shortcut icon" href="{% theme_asset_file favicon.ico %}">
+        <link rel="apple-touch-icon" href="{% theme_asset_file apple-touch-icon-precomposed.png %}">
+        <link rel="apple-touch-icon-precomposed" href="{% theme_asset_file apple-touch-icon-precomposed.png %}">
+        {# WINDOWS 8 TILE ICON #}
+        <meta name="application-name" content="{% site_name %}">
+        <meta name="msapplication-TileColor" content="#00aaef">
+        <meta name="msapplication-TileImage" content="{% theme_asset_file metro-icon.png %}">
+
+        {# STYLESHEETS #}
+        <link rel="stylesheet" type="text/css" href="{% theme_asset_file style-global.css %}">
+        <link rel="stylesheet" type="text/css" media="(min-width: 981px)" href="{% theme_asset_file style.css %}">
+        <link rel="stylesheet" type="text/css" media="(max-width: 980px)" href="{% theme_asset_file style-responsive.css %}">
+
+        {# UNSUPPORTED RESPONSIVE AND HTML5 SHIV #}
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="{% theme_asset_file style.css %}">
+            {% assets "html5shiv" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+            {% endassets %}
+        <![endif]-->
+
+        {% block styles %}{% endblock %}
+
+        {% cms_epilogue %}
+    </head>
+
+    {% block body %}{% endblock %}
+
+        {% cms_body %}
+
+        <div class="responsive-bar visible-small">
+            <span class="navbar-toggle website-navbar-toggle visible-small" data-nav="website"></span>
+            <span class="navigation-bar-title">Menu</span>
+        </div>
+
+        <div class="container">
+            <div class="inner-container">
+
+                <span class="login-link small visible-large">{% login_link %}</span>
+
+                <header class="main-header">
+                    {# The home-link should be placed over the school logo/name to act as a quick link to the home page #}
+                    <a href="{% home_url %}" class="home-link" title="Home Page">Home Page</a>
+
+                    {% block header %}{% endblock %}
+                </header>
+
+                <div class="content-container">
+                    <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+
+                    <ul class="breadcrumbs small">
+                        {% block breadcrumbs %}{% endblock %}
+                    </ul>
+
+                    {% block content %}{% endblock %}
+                </div>
+
+                <nav class="main-nav mobile-nav small">
+                    <span class="close-mobile-nav" data-nav="website"></span>
+                    <h2 class="ps_mobile-header">Website Menu</h2>
+
+                    <ul>
+                        <li class="ps_topic_link home-btn"><a href="{% home_url %}">Home</a></li>
+                        {% topic_menu_full section-one "Section One" %}
+                        {% topic_menu_full section-two "Section Two" %}
+                        {% topic_menu_full section-three "Section Three" %}
+                        {% topic_menu_full section-four "Section Four" %}
+
+                        <li class="login-responsive visible-small">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'auth_logout_with_post_logout_redirect' request|post_logout_redirect_for_page %}">Log out</a>
+                        {% else %}
+                            {% login_link %}
+                        {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <footer class="main-footer small">
+                    {% block footer %}{% endblock %}
+                    <div class="footer-links small">
+                        <ul class="footer-left">
+                          <li><a href="{% special_page_url sitemap %}">Sitemap</a></li>
+                          <li><a href="{% special_page_url cookie-information %}">Cookie Information</a></li>
+                          <li><a href="{% special_page_url policy %}">Website Policy</a></li>
+                        </ul>
+
+                        <ul class="text-right">
+                            <li>All website content copyright &copy; {% site_name %}</li>
+                            <li><a href="http://primarysite.net/">School Website Design by PrimarySite</a></li>
+                        </ul>
+                    </div>
+                </footer>
+
+                {# TRANSLATION WIDGET #}
+                {% include "themes/translate_element.html" %}
+
+            </div>
+
+        </div>
+
+        {# 'Back to top' button. Do not delete! #}
+        <div class="scroll-top">&#xe000;<span>Top</span></div>
+
+        {# JS #}
+        {% include "themes/common_scripts.html" %}
+        <script type="text/javascript" src="{% theme_asset_file app.js %}"></script>
+        {% block scripts %}{% endblock %}
+
+        {% analytics %}
+    </body>
+</html>

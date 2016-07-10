@@ -1,0 +1,29 @@
+{% extends "BuildTemplate/base.html" %}
+{% load themer %}
+
+{% block title %}Maths{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}Maths{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% home_url %}">Home</a></li>
+    <li><a href="{% topic_url children %}">Children</a></li>
+    <li><a href="{% special_page_url kidszone %}">Kids' Zone</a></li>
+    <li><a href="{% special_page_url maths %}">Maths</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="kidszone-content">
+        {% include "themes/kids_zone/kids_zone_maths.html" %}
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}
