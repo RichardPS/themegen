@@ -9,12 +9,12 @@
 
 {% block header %}{% endblock %}
 
-{% block page_title %}Calendar{% endblock %}
+{% block page_title %}School Diary{% endblock %}
 
 {% block breadcrumbs %}
     <li><a href="{% home_url %}">Home</a></li>
-    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
-    <li><a href="{% diary_url %}">Calendar</a></li>
+    <li><a href="{% topic_url section-six %}">Section Six</a></li>
+    <li><a href="{% diary_url %}">School Diary</a></li>
     <li><a href="{{ request.path }}">{% diary_title %}</a></li>
 {% endblock %}
 

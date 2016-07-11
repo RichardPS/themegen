@@ -6,119 +6,8 @@ import os
 from datetime import datetime
 from slugify import slugify
 
-# declare global variables
-SEOPRIMARY = [
-    "Designed by PrimarySite",
-    "Design by PrimarySite",
-    "Website by PrimarySite",
-    "Web Site by PrimarySite",
-    "Web Design by PrimarySite",
-    "Website Design by PrimarySite",
-    "Website Designed by PrimarySite",
-    "Web Site Design by PrimarySite",
-    "Web Site Designed by PrimarySite",
-    "Websites for schools by PrimarySite",
-    "Websites for primary schools by PrimarySite",
-    "Primary School Websites by PrimarySite",
-    "Websites for Primary Schools by PrimarySite",
-    "PrimarySite School Website Design",
-    "A PrimarySite School Website",
-    "A PrimarySite School Website Design",
-    "A PrimarySite School Web Site",
-    "A PrimarySite School Web Site Design",
-    "Unique Websites for schools by PrimarySite",
-    "Unique Websites for Unique Schools by PrimarySite",
-    "Created by PrimarySite",
-    "Created by PrimarySite, school website designers",
-    "Created by PrimarySite, primary school website designers",
-    "PrimarySite Website Design",
-    "PrimarySite Web Design",
-    "School Website by PrimarySite",
-    "School Website from PrimarySite",
-    "School Website Design by PrimarySite",
-    "School Website Designed by PrimarySite",
-    "PrimarySite - Websites for Schools",
-    "PrimarySite - Websites for Primary Schools",
-    "PrimarySite - School Website Designers",
-    "PrimarySite - the School Website Specialists",
-    "PrimarySite - School Websites",
-    "PrimarySite - Websites for Schools",
-    "PrimarySite - Websites for Primary Schools ",
-    "PrimarySite - School Web Site Designers",
-    "PrimarySite - the School Web Site Specialists",
-    "PrimarySite - School Web Sites",
-    "PrimarySite - Web Sites for Schools",
-    "PrimarySite - Web Sites for Primary Schools",
-    "PrimarySite - Outstanding School Websites",
-    "PrimarySite - Outstanding School Web Sites",
-    "Web Site by PrimarySite",
-    "Web Site Design by PrimarySite",
-    "Primary School Websites by PrimarySite",
-    "A PrimarySite School Website Design",
-    "Unique Websites for Unique Schools by PrimarySite",
-    "PrimarySite Website Design",
-    "School Website Design by PrimarySite",
-    "PrimarySite - School Website Designers",
-    "PrimarySite - Websites for Primary Schools",
-    "Created by PrimarySite",
-    "PrimarySite Website Design",
-]
-SEONURSERY = [
-    "Designed by NurserySite",
-    "Design by NurserySite",
-    "Website by NurserySite",
-    "Web Site by NurserySite",
-    "Web Design by NurserySite",
-    "Website Design by NurserySite",
-    "Website Designed by NurserySite",
-    "Web Site Design by NurserySite",
-    "Web Site Designed by NurserySite",
-    "Websites for schools by NurserySite",
-    "Websites for primary schools by NurserySite",
-    "Nursery School Websites by NurserySite",
-    "Websites for Nursery Schools by NurserySite",
-    "NurserySite School Website Design",
-    "A NurserySite School Website",
-    "A NurserySite School Website Design",
-    "A NurserySite School Web Site",
-    "A NurserySite School Web Site Design",
-    "Unique Websites for schools by NurserySite",
-    "Unique Websites for Unique Schools by NurserySite",
-    "Created by NurserySite",
-    "Created by NurserySite, school website designers",
-    "Created by NurserySite, Nursery school website designers",
-    "NurserySite Website Design",
-    "NurserySite Web Design",
-    "School Website by NurserySite",
-    "School Website from NurserySite",
-    "School Website Design by NurserySite",
-    "School Website Designed by NurserySite",
-    "NurserySite - Websites for Schools",
-    "NurserySite - Websites for Nursery Schools",
-    "NurserySite - School Website Designers",
-    "NurserySite - the School Website Specialists",
-    "NurserySite - School Websites",
-    "NurserySite - Websites for Schools",
-    "NurserySite - Websites for Nursery Schools ",
-    "NurserySite - School Web Site Designers",
-    "NurserySite - the School Web Site Specialists",
-    "NurserySite - School Web Sites",
-    "NurserySite - Web Sites for Schools",
-    "NurserySite - Web Sites for Nursery Schools",
-    "NurserySite - Outstanding School Websites",
-    "NurserySite - Outstanding School Web Sites",
-    "Web Site by NurserySite",
-    "Web Site Design by NurserySite",
-    "Nursery School Websites by NurserySite",
-    "A NurserySite School Website Design",
-    "Unique Websites for Unique Schools by NurserySite",
-    "NurserySite Website Design",
-    "School Website Design by NurserySite",
-    "NurserySite - School Website Designers",
-    "NurserySite - Websites for Nursery Schools",
-    "Created by NurserySite",
-    "NurserySite Website Design",
-]
+from conf import *
+
 calendarweek = datetime.today().isocalendar()[1]
 
 # read/edit/write theme files
@@ -135,19 +24,19 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         with open(htmlpath+file,'r') as f:
             text = f.read()
         if file == 'core.homepage.html':
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         elif file == 'base.html':
-            text = text.replace('                        {% topic_menu_full about-us "About Us" %}\r\n','##')
-            text = text.replace('                        {% topic_menu_full key-information "Key Information" %}\r\n','')
-            text = text.replace('                        {% topic_menu_full news-and-events "News and Events" %}\r\n','')
-            text = text.replace('                        {% topic_menu_full parents "Parents" %}\r\n','')
-            text = text.replace('                        {% topic_menu_full children "Children" %}\r\n','')
+            text = text.replace(BASE_ABOUT_US,'##')
+            text = text.replace(BASE_KEY_INFO,'')
+            text = text.replace(BASE_NEWS_EVENTS,'')
+            text = text.replace(BASE_PARENTS,'')
+            text = text.replace(BASE_CHILDREN,'')
             # if nursery is true add nurserysite text
             if nursery:
-                text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek])
+                text = text.replace(CORP_LINK,'<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek])
             # else add primarysite text
             else:
-                text = text.replace('<li><a href="http://primarysite.net">Website design by PrimarySite','<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek])
+                text = text.replace(CORP_LINK,'<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek])
             newtopics = ''
             i = 0
             while i < len(topicslugs):
@@ -157,44 +46,44 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
             or file == 'diary.list.html':
             text = text.replace('Calendar',specialpages['calendarName'])
-            text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(BREADCRUMB_NEWS_EVENTS,'    <li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         elif file == 'special.calendar-breadcrumbs.html':
             text = text.replace('Calendar',specialpages['calendarName'])
-            text = text.replace('<li><a href="{% topic_url news-and-events %}">News and Events</a></li>','<li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "'+themeslug+'/base.html" %}')
+            text = text.replace(BREADCRUMB_NEWS_EVENTS,'<li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
+            text = text.replace(EXTENDS_BASE,'{% extends "'+themeslug+'/base.html" %}')
         elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
             text = text.replace('Latest News',specialpages['newsName'])
-            text = text.replace('    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['newsParent'], to_lower=True) + ' %}">' + specialpages['newsParent'] + '</a></li>')
+            text = text.replace(BREADCRUMB_NEWS_EVENTS,'    <li><a href="{% topic_url ' + slugify(specialpages['newsParent'], to_lower=True) + ' %}">' + specialpages['newsParent'] + '</a></li>')
             text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">' + specialpages['newsName'] + '</a></li>')
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         elif file == 'special.brain-builders.html' or file == 'special.english.html' \
             or file == 'special.games.html' or file == 'special.history.html' \
             or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' \
             or file == 'special.maths.html' or file == 'special.science.html' \
             or file == 'special.kidszone.html':
-            text = text.replace('    <li><a href="{% topic_url children %}">Children</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['kidParent'], to_lower=True) + ' %}">' + specialpages['kidParent'] + '</a></li>')
+            text = text.replace(BREADCRUMB_CHILDREN,'    <li><a href="{% topic_url ' + slugify(specialpages['kidParent'], to_lower=True) + ' %}">' + specialpages['kidParent'] + '</a></li>')
             text = text.replace('Kids\' Zone',specialpages['kidName'])
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         elif file == 'special.sitemap.html':
-            text = text.replace('            {% topic_menu_full about-us %}\r\n','##')
-            text = text.replace('            {% topic_menu_full key-information %}\r\n','')
-            text = text.replace('            {% topic_menu_full news-and-events %}\r\n','')
-            text = text.replace('            {% topic_menu_full parents %}\r\n','')
-            text = text.replace('            {% topic_menu_full children %}\r\n','')
+            text = text.replace(SITEMAP_ABOUT_US,'##')
+            text = text.replace(SITEMAP_KEY_INFO,'')
+            text = text.replace(SITEMAP_NEWS_EVENTS,'')
+            text = text.replace(SITEMAP_PARENTS,'')
+            text = text.replace(SITEMAP_CHILDREN,'')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
                 newtopics += '            {% topic_menu_full ' + topicslugs[i] + ' %}\r\n'
                 i = i + 1
             text = text.replace('##',newtopics)
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         elif file == 'special.virtual-tour.html':
-            text = text.replace('    <li><a href="{% topic_url about-us %}">About Us</a></li>','    <li><a href="{% topic_url ' + slugify(specialpages['tourParent'], to_lower=True) + ' %}">' + specialpages['tourParent'] + '</a></li>')
+            text = text.replace(BREADCRUMB_ABOUT_US,'    <li><a href="{% topic_url ' + slugify(specialpages['tourParent'], to_lower=True) + ' %}">' + specialpages['tourParent'] + '</a></li>')
             text = text.replace('School Tour',specialpages['tourName'])
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         else:
-            text = text.replace('{% extends "BuildTemplate/base.html" %}','{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
         with open(htmlwritepath+file,'w') as f:
             f.write(text)
     # edit css files
