@@ -129,22 +129,22 @@ footer {
 .main-nav .home-btn { background-position: 0 0; z-index: 200; }
 .main-nav .ps_topic_slug_section-one { background-position: 0 -52px; z-index: 199; }
 .main-nav .ps_topic_slug_section-two { background-position: 0 -104px; z-index: 198; }
-.main-nav .ps_topic_slug_section-one { background-position: 0 -156px; z-index: 197; }
-.main-nav .ps_topic_slug_section-two { background-position: 0 -208px; z-index: 196; }
+.main-nav .ps_topic_slug_section-five { background-position: 0 -156px; z-index: 197; }
+.main-nav .ps_topic_slug_section-six { background-position: 0 -208px; z-index: 196; }
 .main-nav .ps_topic_slug_section-one { background-position: 0 -260px; z-index: 195; }
 .main-nav .ps_topic_slug_section-two { background-position: 0 -312px; z-index: 194; }
-.main-nav .ps_topic_slug_section-one { background-position: 0 -364px; z-index: 193; }
-.main-nav .ps_topic_slug_section-twob { background-position: 0 -416px; z-index: 192; }
+.main-nav .ps_topic_slug_section-five { background-position: 0 -364px; z-index: 193; }
+.main-nav .ps_topic_slug_section-six { background-position: 0 -416px; z-index: 192; }
 
 .main-nav .home-btn:focus, .main-nav .home-btn:hover { background-position: right top; }
 .main-nav .ps_topic_slug_section-one:focus, .main-nav .ps_topic_slug_section-one:hover { background-position: right -52px; }
 .main-nav .ps_topic_slug_section-two:focus, .main-nav .ps_topic_slug_section-two:hover { background-position: right -104px; }
-.main-nav .ps_topic_slug_section-one:focus, .main-nav .ps_topic_slug_section-one:hover { background-position: right -156px; }
-.main-nav .ps_topic_slug_section-two:focus, .main-nav .ps_topic_slug_section-two:hover { background-position: right -208px; }
+.main-nav .ps_topic_slug_section-five:focus, .main-nav .ps_topic_slug_section-five:hover { background-position: right -156px; }
+.main-nav .ps_topic_slug_section-six:focus, .main-nav .ps_topic_slug_section-six:hover { background-position: right -208px; }
 .main-nav .ps_topic_slug_section-one:focus, .main-nav .ps_topic_slug_section-one:hover { background-position: right -260px; }
 .main-nav .ps_topic_slug_section-two:focus, .main-nav .ps_topic_slug_section-two:hover { background-position: right -312px; }
-.main-nav .ps_topic_slug_section-one:focus, .main-nav .ps_topic_slug_section-one:hover { background-position: right -364px; }
-.main-nav .ps_topic_slug_section-twob:focus, .main-nav .ps_topic_slug_section-twob:hover { background-position: right -416px; }
+.main-nav .ps_topic_slug_section-five:focus, .main-nav .ps_topic_slug_section-five:hover { background-position: right -364px; }
+.main-nav .ps_topic_slug_section-six:focus, .main-nav .ps_topic_slug_section-six:hover { background-position: right -416px; }
 
 
 /* Pop Ups */
@@ -209,12 +209,12 @@ footer {
    DELETE IF NOT NEEDED */
 .main-nav .ps_topic_slug_section-one ul {}
 .main-nav .ps_topic_slug_section-two ul {}
+.main-nav .ps_topic_slug_section-five ul {}
+.main-nav .ps_topic_slug_section-six ul {}
 .main-nav .ps_topic_slug_section-one ul {}
 .main-nav .ps_topic_slug_section-two ul {}
-.main-nav .ps_topic_slug_section-one ul {}
-.main-nav .ps_topic_slug_section-two ul {}
-.main-nav .ps_topic_slug_section-one ul {}
-.main-nav .ps_topic_slug_section-twob ul {}
+.main-nav .ps_topic_slug_section-five ul {}
+.main-nav .ps_topic_slug_section-six ul {}
 
 /* To style the links in the pop up menus
    Styles for ALL menus added here, styles for individual menus added below */
@@ -233,12 +233,12 @@ footer {
    DELETE IF NOT NEEDED */
 .main-nav .ps_topic_slug_section-one ul li a {}
 .main-nav .ps_topic_slug_section-two ul li a {}
+.main-nav .ps_topic_slug_section-five ul li a {}
+.main-nav .ps_topic_slug_section-six ul li a {}
 .main-nav .ps_topic_slug_section-one ul li a {}
 .main-nav .ps_topic_slug_section-two ul li a {}
-.main-nav .ps_topic_slug_section-one ul li a {}
-.main-nav .ps_topic_slug_section-two ul li a {}
-.main-nav .ps_topic_slug_section-one ul li a {}
-.main-nav .ps_topic_slug_section-twob ul li a {}
+.main-nav .ps_topic_slug_section-five ul li a {}
+.main-nav .ps_topic_slug_section-six ul li a {}
 
 /* To style the hover effects for the links in the popup menus
    Styles for ALL menus added here, styles for individual menus added below */
@@ -252,23 +252,23 @@ footer {
    DELETE IF NOT NEEDED */
 .main-nav .ps_topic_slug_section-one ul li:focus, .main-nav .ps_topic_slug_section-one ul li:hover {}
 .main-nav .ps_topic_slug_section-two ul li:focus, .main-nav .ps_topic_slug_section-two ul li:hover {}
+.main-nav .ps_topic_slug_section-five ul li:focus, .main-nav .ps_topic_slug_section-five ul li:hover {}
+.main-nav .ps_topic_slug_section-six ul li:focus, .main-nav .ps_topic_slug_section-six ul li:hover {}
 .main-nav .ps_topic_slug_section-one ul li:focus, .main-nav .ps_topic_slug_section-one ul li:hover {}
 .main-nav .ps_topic_slug_section-two ul li:focus, .main-nav .ps_topic_slug_section-two ul li:hover {}
-.main-nav .ps_topic_slug_section-one ul li:focus, .main-nav .ps_topic_slug_section-one ul li:hover {}
-.main-nav .ps_topic_slug_section-two ul li:focus, .main-nav .ps_topic_slug_section-two ul li:hover {}
-.main-nav .ps_topic_slug_section-one ul li:focus, .main-nav .ps_topic_slug_section-one ul li:hover {}
-.main-nav .ps_topic_slug_section-twob ul li:focus, .main-nav .ps_topic_slug_section-twob ul li:hover {}
+.main-nav .ps_topic_slug_section-five ul li:focus, .main-nav .ps_topic_slug_section-five ul li:hover {}
+.main-nav .ps_topic_slug_section-six ul li:focus, .main-nav .ps_topic_slug_section-six ul li:hover {}
 
 
 /* To specifically style the hover effects for the links for each menu, eg, text colour etc.  */
 .main-nav .ps_topic_slug_section-one ul a:focus, .main-nav .ps_topic_slug_section-one ul a:hover {}
 .main-nav .ps_topic_slug_section-two ul a:focus, .main-nav .ps_topic_slug_section-two ul a:hover {}
+.main-nav .ps_topic_slug_section-five ul a:focus, .main-nav .ps_topic_slug_section-five ul a:hover {}
+.main-nav .ps_topic_slug_section-six ul a:focus, .main-nav .ps_topic_slug_section-six ul a:hover {}
 .main-nav .ps_topic_slug_section-one ul a:focus, .main-nav .ps_topic_slug_section-one ul a:hover {}
 .main-nav .ps_topic_slug_section-two ul a:focus, .main-nav .ps_topic_slug_section-two ul a:hover {}
-.main-nav .ps_topic_slug_section-one ul a:focus, .main-nav .ps_topic_slug_section-one ul a:hover {}
-.main-nav .ps_topic_slug_section-two ul a:focus, .main-nav .ps_topic_slug_section-two ul a:hover {}
-.main-nav .ps_topic_slug_section-one ul a:focus, .main-nav .ps_topic_slug_section-one ul a:hover {}
-.main-nav .ps_topic_slug_section-twob ul a:focus, .main-nav .ps_topic_slug_section-twob ul a:hover {}
+.main-nav .ps_topic_slug_section-five ul a:focus, .main-nav .ps_topic_slug_section-five ul a:hover {}
+.main-nav .ps_topic_slug_section-six ul a:focus, .main-nav .ps_topic_slug_section-six ul a:hover {}
 
 
 /* Policy & PrimarySite Link

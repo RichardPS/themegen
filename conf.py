@@ -1,3 +1,5 @@
+
+from slugify import slugify
 #define constants
 '''SEO TEXT PRIMARY'''
 SEOPRIMARY = [
@@ -129,14 +131,20 @@ SITEMAP_KEY_INFO = '            {% topic_menu_full key-information %}\r\n'
 SITEMAP_NEWS_EVENTS = '            {% topic_menu_full news-and-events %}\r\n'
 SITEMAP_PARENTS = '            {% topic_menu_full parents %}\r\n'
 SITEMAP_CHILDREN = '            {% topic_menu_full children %}\r\n'
-'''BREADCRUMB LINKS'''
+'''BREADCRUMB TOPIC LINKS'''
 BREADCRUMB_NEWS_EVENTS = '    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>'
 BREADCRUMB_CHILDREN = '    <li><a href="{% topic_url children %}">Children</a></li>'
 BREADCRUMB_ABOUT_US = '    <li><a href="{% topic_url about-us %}">About Us</a></li>'
+'''BREADCRUMB PAGE LINKS'''
+BREADCRUMB_NEWS_PAGE = '    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>'
 
+def extends_theme(themename):
+    extendtheme = '{% extends "'
+    extendtheme += themename
+    extendtheme += '/base.html" %}'
+    return extendtheme
 
 def base_topic(slug,name):
-    newitem = ''
     newitem = '                        '
     newitem += '{% topic_menu_full '
     newitem += slug
@@ -144,12 +152,36 @@ def base_topic(slug,name):
     return newitem
 
 def sitemap_topic(slug):
-    newitem = ''
     newitem = '            '
     newitem += '{% topic_menu_full '
     newitem += slug
     newitem += ' %}\r\n'
     return newitem
+
+def topic_breadcrumb(parent):
+    newcrumb = '    '
+    newcrumb += '<li><a href="{% topic_url '
+    newcrumb += slugify(parent, to_lower=True)
+    newcrumb += ' %}">'
+    newcrumb += parent
+    newcrumb += '</a></li>'
+    return newcrumb
+
+def news_breadcrumb(newspagename):
+    newscrumb = '    '
+    newscrumb += '<li><a href="{% activity_stream_url full news %}">'
+    newscrumb += newspagename
+    newscrumb += '</a></li>'
+    return newscrumb
+
+def tour_breadcrumb(tourpagename):
+    tourcrumb = '    '
+    tourcrumb += '<li><a href="{% topic_url '
+    tourcrumb += slugify(tourpagename, to_lower=True)
+    tourcrumb += ' %}">'
+    tourcrumb += tourpagename
+    tourcrumb += '</a></li>'
+    return tourcrumb
 
 def new_corp_link(nursery,calendarweek):
     if nursery:

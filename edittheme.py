@@ -24,63 +24,63 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         with open(htmlpath+file,'r') as f:
             text = f.read()
         if file == 'core.homepage.html':
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'base.html':
-            text = text.replace(BASE_ABOUT_US,'##')
-            text = text.replace(BASE_KEY_INFO,'')
-            text = text.replace(BASE_NEWS_EVENTS,'')
-            text = text.replace(BASE_PARENTS,'')
-            text = text.replace(BASE_CHILDREN,'')
-            # if nursery is true add nurserysite text
+            text = text.replace(BASE_ABOUT_US, '##')
+            text = text.replace(BASE_KEY_INFO, '')
+            text = text.replace(BASE_NEWS_EVENTS, '')
+            text = text.replace(BASE_PARENTS, '')
+            text = text.replace(BASE_CHILDREN, '')
+            # replace corp link
             text = text.replace(CORP_LINK, new_corp_link(nursery,calendarweek))
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += base_topic(topicslugs[i],topicnames[i])
+                newtopics += base_topic(topicslugs[i], topicnames[i])
                 i = i + 1
             print newtopics
-            text = text.replace('##',newtopics)
+            #text = text.replace('##',newtopics)
         elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
             or file == 'diary.list.html':
-            text = text.replace('Calendar',specialpages['calendarName'])
-            text = text.replace(BREADCRUMB_NEWS_EVENTS,'    <li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace('Calendar', specialpages['calendarName'])
+            text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['calendarParent']))
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.calendar-breadcrumbs.html':
-            text = text.replace('Calendar',specialpages['calendarName'])
-            text = text.replace(BREADCRUMB_NEWS_EVENTS,'<li><a href="{% topic_url ' + slugify(specialpages['calendarParent'], to_lower=True) + ' %}">' + specialpages['calendarParent'] + '</a></li>')
-            text = text.replace(EXTENDS_BASE,'{% extends "'+themeslug+'/base.html" %}')
+            text = text.replace('Calendar', specialpages['calendarName'])
+            text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['calendarParent']))
+            text = text.replace(EXTENDS_BASE, '{% extends "'+themeslug+'/base.html" %}')
         elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
-            text = text.replace('Latest News',specialpages['newsName'])
-            text = text.replace(BREADCRUMB_NEWS_EVENTS,'    <li><a href="{% topic_url ' + slugify(specialpages['newsParent'], to_lower=True) + ' %}">' + specialpages['newsParent'] + '</a></li>')
-            text = text.replace('    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>','    <li><a href="{% activity_stream_url full news %}">' + specialpages['newsName'] + '</a></li>')
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace('Latest News', specialpages['newsName'])
+            text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['newsParent']))
+            text = text.replace(BREADCRUMB_NEWS_PAGE, news_breadcrumb(specialpages['newsName']))
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.brain-builders.html' or file == 'special.english.html' \
             or file == 'special.games.html' or file == 'special.history.html' \
             or file == 'special.ks1-links.html' or file == 'special.ks2-links.html' \
             or file == 'special.maths.html' or file == 'special.science.html' \
             or file == 'special.kidszone.html':
-            text = text.replace(BREADCRUMB_CHILDREN,'    <li><a href="{% topic_url ' + slugify(specialpages['kidParent'], to_lower=True) + ' %}">' + specialpages['kidParent'] + '</a></li>')
-            text = text.replace('Kids\' Zone',specialpages['kidName'])
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(BREADCRUMB_CHILDREN, topic_breadcrumb(specialpages['kidParent']))
+            text = text.replace('Kids\' Zone', specialpages['kidName'])
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.sitemap.html':
-            text = text.replace(SITEMAP_ABOUT_US,'##')
-            text = text.replace(SITEMAP_KEY_INFO,'')
-            text = text.replace(SITEMAP_NEWS_EVENTS,'')
-            text = text.replace(SITEMAP_PARENTS,'')
-            text = text.replace(SITEMAP_CHILDREN,'')
+            text = text.replace(SITEMAP_ABOUT_US, '##')
+            text = text.replace(SITEMAP_KEY_INFO, '')
+            text = text.replace(SITEMAP_NEWS_EVENTS, '')
+            text = text.replace(SITEMAP_PARENTS, '')
+            text = text.replace(SITEMAP_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
                 newtopics += sitemap_topic(topicslugs[i])
                 i = i + 1
-            text = text.replace('##',newtopics)
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace('##', newtopics)
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.virtual-tour.html':
-            text = text.replace(BREADCRUMB_ABOUT_US,'    <li><a href="{% topic_url ' + slugify(specialpages['tourParent'], to_lower=True) + ' %}">' + specialpages['tourParent'] + '</a></li>')
-            text = text.replace('School Tour',specialpages['tourName'])
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(BREADCRUMB_ABOUT_US, tour_breadcrumb(specialpages['tourParent']))
+            text = text.replace('School Tour', specialpages['tourName'])
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         else:
-            text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         with open(htmlwritepath+file,'w') as f:
             f.write(text)
     # edit css files

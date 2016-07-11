@@ -76,15 +76,7 @@
 
                     <ul>
                         <li class="ps_topic_link home-btn"><a href="{% home_url %}">Home</a></li>
-                        {% topic_menu_full section-one "Section One" %}
-                        {% topic_menu_full section-two "Section Two" %}
-                        {% topic_menu_full section-one "Section One" %}
-                        {% topic_menu_full section-two "Section Two" %}
-                        {% topic_menu_full section-one "Section One" %}
-                        {% topic_menu_full section-two "Section Two" %}
-                        {% topic_menu_full section-one "Section One" %}
-                        {% topic_menu_full section-twob "Section Twob" %}
-
+##
                         <li class="login-responsive visible-small">
                         {% if user.is_authenticated %}
                             <a href="{% url 'auth_logout_with_post_logout_redirect' request|post_logout_redirect_for_page %}">Log out</a>

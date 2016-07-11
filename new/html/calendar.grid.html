@@ -1,7 +1,7 @@
 {% extends "MyTheme/base.html" %}
 {% load themer %}
 
-{% block title %}Calendar{% endblock %}
+{% block title %}Page 3{% endblock %}
 
 {% block styles %}{% endblock %}
 
@@ -9,12 +9,12 @@
 
 {% block header %}{% endblock %}
 
-{% block page_title %}Calendar{% endblock %}
+{% block page_title %}Page 3{% endblock %}
 
 {% block breadcrumbs %}
     <li><a href="{% home_url %}">Home</a></li>
-    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
-    <li><a href="{% url 'diary_grid' year month_number %}">Calendar</a></li>
+    <li><a href="{% topic_url section-two %}">Section Two</a></li>
+    <li><a href="{% url 'diary_grid' year month_number %}">Page 3</a></li>
 {% endblock %}
 
 {% block content %}
