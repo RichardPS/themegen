@@ -32,16 +32,13 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
             text = text.replace(BASE_PARENTS,'')
             text = text.replace(BASE_CHILDREN,'')
             # if nursery is true add nurserysite text
-            if nursery:
-                text = text.replace(CORP_LINK,'<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek])
-            # else add primarysite text
-            else:
-                text = text.replace(CORP_LINK,'<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek])
+            text = text.replace(CORP_LINK, new_corp_link(nursery,calendarweek))
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '                        {% topic_menu_full ' + topicslugs[i] + ' "' + topicnames[i] + '" %}\r\n'
+                newtopics += base_topic(topicslugs[i],topicnames[i])
                 i = i + 1
+            print newtopics
             text = text.replace('##',newtopics)
         elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
             or file == 'diary.list.html':
@@ -74,7 +71,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '            {% topic_menu_full ' + topicslugs[i] + ' %}\r\n'
+                newtopics += sitemap_topic(topicslugs[i])
                 i = i + 1
             text = text.replace('##',newtopics)
             text = text.replace(EXTENDS_BASE,'{% extends "' + themeslug + '/base.html" %}')

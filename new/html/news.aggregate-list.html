@@ -1,7 +1,7 @@
 {% extends "MyTheme/base.html" %}
 {% load themer %}
 
-{% block title %}School News{% endblock %}
+{% block title %}Latest News{% endblock %}
 
 {% block styles %}{% endblock %}
 
@@ -9,12 +9,12 @@
 
 {% block header %}{% endblock %}
 
-{% block page_title %}School News{% endblock %}
+{% block page_title %}Latest News{% endblock %}
 
 {% block breadcrumbs %}
     <li><a href="{% home_url %}">Home</a></li>
-    <li><a href="{% topic_url section-five %}">Section Five</a></li>
-    <li><a href="{% activity_stream_url full news %}">School News</a></li>
+    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
+    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>
 {% endblock %}
 
 {% block content %}

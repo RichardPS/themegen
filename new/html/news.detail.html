@@ -13,8 +13,8 @@
 
 {% block breadcrumbs %}
     <li><a href="{% home_url %}">Home</a></li>
-    <li><a href="{% topic_url section-five %}">Section Five</a></li>
-    <li><a href="{% activity_stream_url full news %}">School News</a></li>
+    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>
+    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>
     <li><a href="{{ request.path }}">{% news_title %}</a></li>
 {% endblock %}
 

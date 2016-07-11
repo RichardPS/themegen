@@ -133,3 +133,27 @@ SITEMAP_CHILDREN = '            {% topic_menu_full children %}\r\n'
 BREADCRUMB_NEWS_EVENTS = '    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>'
 BREADCRUMB_CHILDREN = '    <li><a href="{% topic_url children %}">Children</a></li>'
 BREADCRUMB_ABOUT_US = '    <li><a href="{% topic_url about-us %}">About Us</a></li>'
+
+
+def base_topic(slug,name):
+    newitem = ''
+    newitem = '                        '
+    newitem += '{% topic_menu_full '
+    newitem += slug
+    newitem += ' \"' + name + '\" %}\r\n'
+    return newitem
+
+def sitemap_topic(slug):
+    newitem = ''
+    newitem = '            '
+    newitem += '{% topic_menu_full '
+    newitem += slug
+    newitem += ' %}\r\n'
+    return newitem
+
+def new_corp_link(nursery,calendarweek):
+    if nursery:
+        newlink = '<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek]
+    else:
+        newlink = '<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek]
+    return newlink
