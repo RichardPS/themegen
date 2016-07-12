@@ -94,94 +94,94 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         with open(csspath+file,'r') as f:
             text = f.read()
         if file == 'homepage.css':
-            text = text.replace(HOME_ABOUT_US,'##')
-            text = text.replace(HOME_KEY_INFO,'')
-            text = text.replace(HOME_NEW_EVENTS,'')
-            text = text.replace(HOME_PARENTS,'')
-            text = text.replace(HOME_CHILDREN,'')
+            text = text.replace(HOME_ABOUT_US, '##')
+            text = text.replace(HOME_KEY_INFO, '')
+            text = text.replace(HOME_NEW_EVENTS, '')
+            text = text.replace(HOME_PARENTS, '')
+            text = text.replace(HOME_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
                 newtopics += homecss(topicslugs[i])
                 i = i + 1
-            text = text.replace('##',newtopics)
+            text = text.replace('##', newtopics)
         elif file == 'style.css':
             # line 129
-            text = text.replace(STYLE129_ABOUT_US,'##')
-            text = text.replace(STYLE129_KEY_INFO,'')
-            text = text.replace(STYLE129_NEW_EVENTS,'')
-            text = text.replace(STYLE129_PARENTS,'')
-            text = text.replace(STYLE129_CHILDREN,'')
+            text = text.replace(STYLE129_ABOUT_US, '##')
+            text = text.replace(STYLE129_KEY_INFO, '')
+            text = text.replace(STYLE129_NEW_EVENTS, '')
+            text = text.replace(STYLE129_PARENTS, '')
+            text = text.replace(STYLE129_CHILDREN, '')
             newtopics = ''
             i = 0
             z = 199
             p = 52
             while i < len(topicslugs):
-                newtopics += style129(topicslugs[i],p,z)
+                newtopics += style129(topicslugs[i], p, z)
                 i = i + 1
                 z = z-1
                 p = p + 52
-            text = text.replace('##',newtopics)
+            text = text.replace('##', newtopics)
             # line 136
-            text = text.replace('.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\r\n','')
+            text = text.replace(STYLE136_ABOUT_US, '##')
+            text = text.replace(STYLE136_KEY_INFO, '')
+            text = text.replace(STYLE136_NEW_EVENTS, '')
+            text = text.replace(STYLE136_PARENTS, '')
+            text = text.replace(STYLE136_CHILDREN, '')
             newtopics = ''
             i = 0
             p = 52
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ':focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ':hover { background-position: right -' + str(p) + 'px; }\r\n'
+                newtopics += style136(topicslugs[i], p)
                 i = i + 1
                 p = p + 52
-            text = text.replace('##',newtopics)
+            text = text.replace('##', newtopics)
             # line 204
-            text = text.replace('.main-nav .ps_topic_slug_about-us ul {}\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information ul {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents ul {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children ul {}\r\n','')
+            text = text.replace(STYLE204_ABOUT_US, '##')
+            text = text.replace(STYLE204_KEY_INFO, '')
+            text = text.replace(STYLE204_NEW_EVENTS, '')
+            text = text.replace(STYLE204_PARENTS, '')
+            text = text.replace(STYLE204_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul {}\r\n'
+                newtopics += style204(topicslugs[i])
                 i = i + 1
             text = text.replace('##',newtopics)
             # line 225
-            text = text.replace('.main-nav .ps_topic_slug_about-us ul li a {}\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information ul li a {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents ul li a {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children ul li a {}\r\n','')
+            text = text.replace(STYLE225_ABOUT_US, '##')
+            text = text.replace(STYLE225_KEY_INFO, '')
+            text = text.replace(STYLE225_NEW_EVENTS, '')
+            text = text.replace(STYLE225_PARENTS, '')
+            text = text.replace(STYLE225_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li a {}\r\n'
+                newtopics += style225(topicslugs[i])
                 i = i + 1
-            text = text.replace('##',newtopics)
+            text = text.replace('##', newtopics)
             #line 241
-            text = text.replace('.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\r\n','')
+            text = text.replace(STYLE241_ABOUT_US, '##')
+            text = text.replace(STYLE241_KEY_INFO, '')
+            text = text.replace(STYLE241_NEW_EVENTS, '')
+            text = text.replace(STYLE241_PARENTS, '')
+            text = text.replace(STYLE241_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li:focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ' ul li:hover {}\r\n'
+                newtopics += style241(topicslugs[i])
                 i = i + 1
             text = text.replace('##',newtopics)
             # line 249
-            text = text.replace('.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\r\n','')
+            text = text.replace(STYLE249_ABOUT_US, '##')
+            text = text.replace(STYLE249_KEY_INFO, '')
+            text = text.replace(STYLE249_NEW_EVENTS, '')
+            text = text.replace(STYLE249_PARENTS, '')
+            text = text.replace(STYLE249_CHILDREN, '')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' ul a:focus, .main-nav .ps_topic_slug_' + topicslugs[i] + ' ul a:hover {}\r\n'
+                newtopics += style249(topicslugs[i])
                 i = i + 1
             text = text.replace('##',newtopics)
         else:
@@ -217,5 +217,5 @@ def ziptheme(themename):
             for filename in filenames:
                 themeZip.write(os.path.join(foldername, filename),
                     arcname=os.path.join(os.path.relpath(foldername, \
-                        os.path.dirname(folder)), filename))
+                            os.path.dirname(folder)), filename))
     themeZip.close()

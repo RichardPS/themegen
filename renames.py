@@ -171,37 +171,37 @@ STYLE129_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events { background-pos
 STYLE129_PARENTS = '.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n'
 STYLE129_CHILDREN = '.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n'
 
-''' to do
-STYLE136_ABOUT_US
-STYLE136_KEY_INFO
-STYLE136_NEW_EVENTS
-STYLE136_PARENTS
-STYLE136_CHILDREN
 
-STYLE204_ABOUT_US
-STYLE204_KEY_INFO
-STYLE204_NEW_EVENTS
-STYLE204_PARENTS
-STYLE204_CHILDREN
+STYLE136_ABOUT_US = '.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }\r\n'
+STYLE136_KEY_INFO = '.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }\r\n'
+STYLE136_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }\r\n'
+STYLE136_PARENTS = '.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }\r\n'
+STYLE136_CHILDREN = '.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }\r\n'
 
-STYLE225_ABOUT_US
-STYLE225_KEY_INFO
-STYLE225_NEW_EVENTS
-STYLE225_PARENTS
-STYLE225_CHILDREN
+STYLE204_ABOUT_US = '.main-nav .ps_topic_slug_about-us ul {}\r\n'
+STYLE204_KEY_INFO = '.main-nav .ps_topic_slug_key-information ul {}\r\n'
+STYLE204_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events ul {}\r\n'
+STYLE204_PARENTS = '.main-nav .ps_topic_slug_parents ul {}\r\n'
+STYLE204_CHILDREN = '.main-nav .ps_topic_slug_children ul {}\r\n'
 
-STYLE241_ABOUT_US
-STYLE241_KEY_INFO
-STYLE241_NEW_EVENTS
-STYLE241_PARENTS
-STYLE241_CHILDREN
+STYLE225_ABOUT_US = '.main-nav .ps_topic_slug_about-us ul li a {}\r\n'
+STYLE225_KEY_INFO = '.main-nav .ps_topic_slug_key-information ul li a {}\r\n'
+STYLE225_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events ul li a {}\r\n'
+STYLE225_PARENTS = '.main-nav .ps_topic_slug_parents ul li a {}\r\n'
+STYLE225_CHILDREN = '.main-nav .ps_topic_slug_children ul li a {}\r\n'
 
-STYLE249_ABOUT_US
-STYLE249_KEY_INFO
-STYLE249_NEW_EVENTS
-STYLE249_PARENTS
-STYLE249_CHILDREN
-'''
+STYLE241_ABOUT_US = '.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}\r\n'
+STYLE241_KEY_INFO = '.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}\r\n'
+STYLE241_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}\r\n'
+STYLE241_PARENTS = '.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}\r\n'
+STYLE241_CHILDREN = '.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}\r\n'
+
+STYLE249_ABOUT_US = '.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}\r\n'
+STYLE249_KEY_INFO = '.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}\r\n'
+STYLE249_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}\r\n'
+STYLE249_PARENTS = '.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}\r\n'
+STYLE249_CHILDREN = '.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\r\n'
+
 
 #functions to create html topics, slugs and breadcrumbs
 def extends_theme(themename):
@@ -264,4 +264,42 @@ def style129(slug,p,z):
     stylerule += 'px; z-index: '
     stylerule += str(z)
     stylerule += '; }\r\n'
+    return stylerule
+
+def style136(slug,p):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ':focus, .main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ':hover { background-position: right -'
+    stylerule += str(p)
+    stylerule += 'px; }\r\n'
+    return stylerule
+
+def style204(slug):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule ++ ' ul {}\r\n'
+    return stylerule
+
+def style225(slug):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' ul li a {}\r\n'
+    return stylerule
+
+def style241(slug):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' ul li:focus, .main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' ul li:hover {}\r\n'
+    return stylerule
+
+def style249(slug):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' ul a:focus, .main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' ul a:hover {}\r\n'
     return stylerule
