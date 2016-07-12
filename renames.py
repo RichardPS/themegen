@@ -236,9 +236,11 @@ def tour_breadcrumb(tourpagename):
 
 def new_corp_link(nursery,calendarweek):
     if nursery:
-        newlink = '<li><a href="http://www.nurserysite.co.uk/">' + SEONURSERY[calendarweek]
+        newlink = '<li><a href="http://www.nurserysite.co.uk/">'
+        newlink += SEONURSERY[calendarweek]
     else:
-        newlink = '<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek]
+        newlink = '<li><a href="http://primarysite.net/">'
+        newlink += SEOPRIMARY[calendarweek]
     return newlink
 
 # function to create new css rules for new topics
