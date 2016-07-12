@@ -64,6 +64,7 @@ def process(page_title='Site Theme Info'):
     sitemap = request.forms.get('sitemap')
     themename = request.forms.get('themename')
     nursery = request.forms.get('nursery')
+    #print sitemap
     siteinfo = sitemapprocess(sitemap, themename, nursery)
     return dict(siteinfo=siteinfo, page_title=page_title)
 

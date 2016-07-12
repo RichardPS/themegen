@@ -40,8 +40,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
                 i = i + 1
             print newtopics
             text = text.replace('##',newtopics)
-        elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
-            or file == 'diary.list.html':
+        elif file in CALENDARPAGES:
             text = text.replace('Calendar', specialpages['calendarName'])
             text = text.replace(BREADCRUMB_NEWS_EVENTS, \
                 topic_breadcrumb(specialpages['calendarParent']))
@@ -68,12 +67,12 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
             text = text.replace(SITEMAP_NEWS_EVENTS, '')
             text = text.replace(SITEMAP_PARENTS, '')
             text = text.replace(SITEMAP_CHILDREN, '')
-            newtopics = ''
+            newslugs = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += sitemap_topic(topicslugs[i])
+                newslugs += sitemap_topic(topicslugs[i])
                 i = i + 1
-            text = text.replace('##', newtopics)
+            text = text.replace('##', newslugs)
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.virtual-tour.html':
             text = text.replace(BREADCRUMB_ABOUT_US, \
@@ -217,5 +216,6 @@ def ziptheme(themename):
             # Add all the files in this folder to the ZIP file.
             for filename in filenames:
                 themeZip.write(os.path.join(foldername, filename),
-                    arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+                    arcname=os.path.join(os.path.relpath(foldername, \
+                        os.path.dirname(folder)), filename))
     themeZip.close()

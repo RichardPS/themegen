@@ -152,6 +152,12 @@ KIDSZONEPAGES = [
     'special.kidszone.html',
 ]
 
+CALENDARPAGES = [
+    'calendar.grid.html',
+    'diary.detail.html',
+    'diary.list.html',
+]
+
 #define constants for css
 HOME_ABOUT_US = '.main-nav .ps_topic_slug_about-us {}\r\n'
 HOME_KEY_INFO = '.main-nav .ps_topic_slug_key-information {}\r\n'
