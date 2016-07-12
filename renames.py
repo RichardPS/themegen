@@ -1,6 +1,6 @@
 
 from slugify import slugify
-#define constants
+#define constants for html
 '''SEO TEXT PRIMARY'''
 SEOPRIMARY = [
     "Designed by PrimarySite",
@@ -140,6 +140,64 @@ BREADCRUMB_NEWS_EVENTS = '<li><a href="{% topic_url news-and-events %}">News and
 BREADCRUMB_CHILDREN = '<li><a href="{% topic_url children %}">Children</a></li>'
 BREADCRUMB_ABOUT_US = '<li><a href="{% topic_url about-us %}">About Us</a></li>'
 
+KIDSZONEPAGES = [
+    'special.brain-builders.html',
+    'special.english.html',
+    'special.games.html',
+    'special.history.html',
+    'special.ks1-links.html',
+    'special.ks2-links.html',
+    'special.maths.html',
+    'special.science.html',
+    'special.kidszone.html',
+]
+
+#define constants for css
+HOME_ABOUT_US = '.main-nav .ps_topic_slug_about-us {}\r\n'
+HOME_KEY_INFO = '.main-nav .ps_topic_slug_key-information {}\r\n'
+HOME_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events {}\r\n'
+HOME_PARENTS = '.main-nav .ps_topic_slug_parents {}\r\n'
+HOME_CHILDREN = '.main-nav .ps_topic_slug_children {}\r\n'
+
+STYLE129_ABOUT_US = '.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n'
+STYLE129_KEY_INFO = '.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n'
+STYLE129_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\r\n'
+STYLE129_PARENTS = '.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n'
+STYLE129_CHILDREN = '.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n'
+
+''' to do
+STYLE136_ABOUT_US
+STYLE136_KEY_INFO
+STYLE136_NEW_EVENTS
+STYLE136_PARENTS
+STYLE136_CHILDREN
+
+STYLE204_ABOUT_US
+STYLE204_KEY_INFO
+STYLE204_NEW_EVENTS
+STYLE204_PARENTS
+STYLE204_CHILDREN
+
+STYLE225_ABOUT_US
+STYLE225_KEY_INFO
+STYLE225_NEW_EVENTS
+STYLE225_PARENTS
+STYLE225_CHILDREN
+
+STYLE241_ABOUT_US
+STYLE241_KEY_INFO
+STYLE241_NEW_EVENTS
+STYLE241_PARENTS
+STYLE241_CHILDREN
+
+STYLE249_ABOUT_US
+STYLE249_KEY_INFO
+STYLE249_NEW_EVENTS
+STYLE249_PARENTS
+STYLE249_CHILDREN
+'''
+
+#functions to create html topics, slugs and breadcrumbs
 def extends_theme(themename):
     extendtheme = '{% extends "'
     extendtheme += themename
@@ -182,3 +240,20 @@ def new_corp_link(nursery,calendarweek):
     else:
         newlink = '<li><a href="http://primarysite.net/">' + SEOPRIMARY[calendarweek]
     return newlink
+
+# function to create new css rules for new topics
+def homecss(topicslug):
+    homerule = '.main-nav .ps_topic_slug_'
+    homerule += topicslug
+    homerule += ' {}\r\n'
+    return homerule
+
+def style129(slug,p,z):
+    stylerule = '.main-nav .ps_topic_slug_'
+    stylerule += slug
+    stylerule += ' { background-position: 0 -'
+    stylerule += str(p)
+    stylerule += 'px; z-index: '
+    stylerule += str(z)
+    stylerule += '; }\r\n'
+    return stylerule

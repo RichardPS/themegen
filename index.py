@@ -67,7 +67,6 @@ def process(page_title='Site Theme Info'):
     siteinfo = sitemapprocess(sitemap, themename, nursery)
     return dict(siteinfo=siteinfo, page_title=page_title)
 
-
 @route('/process', method='get')
 def processget():
     """Redirect if request method is GET."""

@@ -57,18 +57,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
                 topic_breadcrumb(specialpages['newsParent']))
             text = text.replace('Latest News', specialpages['newsName'])
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
-        kidszonepages = [
-            'special.brain-builders.html',
-            'special.english.html',
-            'special.games.html',
-            'special.history.html',
-            'special.ks1-links.html',
-            'special.ks2-links.html',
-            'special.maths.html',
-            'special.science.html',
-            'special.kidszone.html',
-        ]
-        elif file in kidszonepages:
+        elif file in KIDSZONEPAGES:
             text = text.replace(BREADCRUMB_CHILDREN, \
                 topic_breadcrumb(specialpages['kidParent']))
             text = text.replace('Kids\' Zone', specialpages['kidName'])
@@ -106,30 +95,30 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         with open(csspath+file,'r') as f:
             text = f.read()
         if file == 'homepage.css':
-            text = text.replace('.main-nav .ps_topic_slug_about-us {}\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents {}\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children {}\r\n','')
+            text = text.replace(HOME_ABOUT_US,'##')
+            text = text.replace(HOME_KEY_INFO,'')
+            text = text.replace(HOME_NEW_EVENTS,'')
+            text = text.replace(HOME_PARENTS,'')
+            text = text.replace(HOME_CHILDREN,'')
             newtopics = ''
             i = 0
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' {}\r\n'
+                newtopics += homecss(topicslugs[i])
                 i = i + 1
             text = text.replace('##',newtopics)
         elif file == 'style.css':
             # line 129
-            text = text.replace('.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }\r\n','##')
-            text = text.replace('.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }\r\n','')
-            text = text.replace('.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }\r\n','')
+            text = text.replace(STYLE129_ABOUT_US,'##')
+            text = text.replace(STYLE129_KEY_INFO,'')
+            text = text.replace(STYLE129_NEW_EVENTS,'')
+            text = text.replace(STYLE129_PARENTS,'')
+            text = text.replace(STYLE129_CHILDREN,'')
             newtopics = ''
             i = 0
             z = 199
             p = 52
             while i < len(topicslugs):
-                newtopics += '.main-nav .ps_topic_slug_' + topicslugs[i] + ' { background-position: 0 -' + str(p) + 'px; z-index: ' + str(z) + '; }\r\n'
+                newtopics += style129(topicslugs[i],p,z)
                 i = i + 1
                 z = z-1
                 p = p + 52
