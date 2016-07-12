@@ -52,7 +52,7 @@ def error404(page_title='404 Error'):
 
 @route('/')
 @view('index')
-def index(page_title='Index'):
+def index(page_title='Index', method='get'):
     """Generate the main index page."""
     return dict(page_title=page_title)
 
@@ -79,7 +79,6 @@ def generic():
     """Redirect to build template."""
     buildgeneric()
     redirect('/BuildTemplate.zip')
-
 
 # run host
 run(host='0.0.0.0', port=8080, debug=True, reloader=True)

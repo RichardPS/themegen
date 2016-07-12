@@ -117,26 +117,28 @@ SEONURSERY = [
 ]
 '''CORP LINK'''
 CORP_LINK = '<li><a href="http://primarysite.net">Website design by PrimarySite'
+
 '''extends base.html'''
 EXTENDS_BASE = '{% extends "BuildTemplate/base.html" %}'
+
 '''BASE.HTML REPLACE STRINGS'''
 BASE_ABOUT_US = '                        {% topic_menu_full about-us "About Us" %}\r\n'
 BASE_KEY_INFO = '                        {% topic_menu_full key-information "Key Information" %}\r\n'
 BASE_NEWS_EVENTS = '                        {% topic_menu_full news-and-events "News and Events" %}\r\n'
 BASE_PARENTS = '                        {% topic_menu_full parents "Parents" %}\r\n'
 BASE_CHILDREN = '                        {% topic_menu_full children "Children" %}\r\n'
+
 '''SPECIAL.SITEMAP.HTML REPLACE STRINGS'''
 SITEMAP_ABOUT_US = '            {% topic_menu_full about-us %}\r\n'
 SITEMAP_KEY_INFO = '            {% topic_menu_full key-information %}\r\n'
 SITEMAP_NEWS_EVENTS = '            {% topic_menu_full news-and-events %}\r\n'
 SITEMAP_PARENTS = '            {% topic_menu_full parents %}\r\n'
 SITEMAP_CHILDREN = '            {% topic_menu_full children %}\r\n'
+
 '''BREADCRUMB TOPIC LINKS'''
-BREADCRUMB_NEWS_EVENTS = '    <li><a href="{% topic_url news-and-events %}">News and Events</a></li>'
-BREADCRUMB_CHILDREN = '    <li><a href="{% topic_url children %}">Children</a></li>'
-BREADCRUMB_ABOUT_US = '    <li><a href="{% topic_url about-us %}">About Us</a></li>'
-'''BREADCRUMB PAGE LINKS'''
-BREADCRUMB_NEWS_PAGE = '    <li><a href="{% activity_stream_url full news %}">Latest News</a></li>'
+BREADCRUMB_NEWS_EVENTS = '<li><a href="{% topic_url news-and-events %}">News and Events</a></li>'
+BREADCRUMB_CHILDREN = '<li><a href="{% topic_url children %}">Children</a></li>'
+BREADCRUMB_ABOUT_US = '<li><a href="{% topic_url about-us %}">About Us</a></li>'
 
 def extends_theme(themename):
     extendtheme = '{% extends "'
@@ -159,24 +161,15 @@ def sitemap_topic(slug):
     return newitem
 
 def topic_breadcrumb(parent):
-    newcrumb = '    '
-    newcrumb += '<li><a href="{% topic_url '
+    newcrumb = '<li><a href="{% topic_url '
     newcrumb += slugify(parent, to_lower=True)
     newcrumb += ' %}">'
     newcrumb += parent
     newcrumb += '</a></li>'
     return newcrumb
 
-def news_breadcrumb(newspagename):
-    newscrumb = '    '
-    newscrumb += '<li><a href="{% activity_stream_url full news %}">'
-    newscrumb += newspagename
-    newscrumb += '</a></li>'
-    return newscrumb
-
 def tour_breadcrumb(tourpagename):
-    tourcrumb = '    '
-    tourcrumb += '<li><a href="{% topic_url '
+    tourcrumb = '<li><a href="{% topic_url '
     tourcrumb += slugify(tourpagename, to_lower=True)
     tourcrumb += ' %}">'
     tourcrumb += tourpagename

@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 from slugify import slugify
 
-from conf import *
+from renameconstants import *
 
 calendarweek = datetime.today().isocalendar()[1]
 
@@ -39,7 +39,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
                 newtopics += base_topic(topicslugs[i], topicnames[i])
                 i = i + 1
             print newtopics
-            #text = text.replace('##',newtopics)
+            text = text.replace('##',newtopics)
         elif file == 'calendar.grid.html' or file == 'diary.detail.html' \
             or file == 'diary.list.html':
             text = text.replace('Calendar', specialpages['calendarName'])
@@ -48,11 +48,11 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         elif file == 'special.calendar-breadcrumbs.html':
             text = text.replace('Calendar', specialpages['calendarName'])
             text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['calendarParent']))
-            text = text.replace(EXTENDS_BASE, '{% extends "'+themeslug+'/base.html" %}')
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'news.aggregate-list.html' or file == 'news.detail.html':
             text = text.replace('Latest News', specialpages['newsName'])
             text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['newsParent']))
-            text = text.replace(BREADCRUMB_NEWS_PAGE, news_breadcrumb(specialpages['newsName']))
+            text = text.replace('Latest News', specialpages['newsName'])
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.brain-builders.html' or file == 'special.english.html' \
             or file == 'special.games.html' or file == 'special.history.html' \
@@ -78,6 +78,10 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         elif file == 'special.virtual-tour.html':
             text = text.replace(BREADCRUMB_ABOUT_US, tour_breadcrumb(specialpages['tourParent']))
             text = text.replace('School Tour', specialpages['tourName'])
+            text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
+        elif file == 'newsletters.aggregate-list.html':
+            text = text.replace(BREADCRUMB_NEWS_EVENTS, topic_breadcrumb(specialpages['letterParent']))
+            text = text.replace('Newsletters', specialpages['letterName'])
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         else:
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
