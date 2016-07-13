@@ -117,27 +117,36 @@ SEONURSERY = [
 ]
 '''CORP LINK'''
 CORP_LINK = '<li><a href="http://primarysite.net">Website design by PrimarySite'
+NURSERY_URL = 'http://www.nurserysite.co.uk/'
+PRIMARY_URL = 'http://primarysite.net/'
 
 '''extends base.html'''
 EXTENDS_BASE = '{% extends "BuildTemplate/base.html" %}'
 
 '''BASE.HTML REPLACE STRINGS'''
+SPACE24 = '                        '
+SPACE12 = '            '
+
 BASE_ABOUT_US = (
                 '                        {% topic_menu_full'
                 ' about-us "About Us" %}\r\n'
                 )
+
 BASE_KEY_INFO = (
                 '                        {% topic_menu_full'
                 ' key-information "Key Information" %}\r\n'
                 )
+
 BASE_NEWS_EVENTS = (
                 '                        {% topic_menu_full'
                 ' news-and-events "News and Events" %}\r\n'
                 )
+
 BASE_PARENTS = (
                 '                        {% topic_menu_full'
                 ' parents "Parents" %}\r\n'
                 )
+
 BASE_CHILDREN = (
                 '                        {% topic_menu_full'
                 ' children "Children" %}\r\n'
@@ -220,17 +229,15 @@ STYLE249_CHILDREN = '.main-nav .ps_topic_slug_children ul li a:focus, .main-nav 
 
 #functions to create html topics, slugs and breadcrumbs
 def extends_theme(themename):
-    extendtheme = '{% extends "'
-    extendtheme += themename
-    extendtheme += '/base.html" %}'
-    return extendtheme
+    a = '{% extends "'
+    c = '/base.html" %}'
+    return '{0}{1}{2}'.format(a, themename, c)
 
 def base_topic(slug,name):
-    newitem = '                        '
-    newitem += '{% topic_menu_full '
-    newitem += slug
-    newitem += ' \"' + name + '\" %}\r\n'
-    return newitem
+    a = '{% topic_menu_full '
+    b = ' "'
+    c = '" %}\r\n'
+    return '{0}{1}{2} "{3}{4}'.format(SPACE24, a, slug, name, c)
 
 def sitemap_topic(slug):
     newitem = '            '
@@ -257,12 +264,12 @@ def tour_breadcrumb(tourpagename):
 
 def new_corp_link(nursery,calendarweek):
     if nursery:
-        newlink = '<li><a href="http://www.nurserysite.co.uk/">'
-        newlink += SEONURSERY[calendarweek]
+        url = NURSERY_URL
+        link = SEONURSERY[calendarweek]
     else:
-        newlink = '<li><a href="http://primarysite.net/">'
-        newlink += SEOPRIMARY[calendarweek]
-    return newlink
+        url = PRIMARY_URL
+        link = SEOPRIMARY[calendarweek]
+    return '<li><a href="{0}">"{1}'.format(url,link)
 
 # function to create new css rules for new topics
 def homecss(topicslug):
