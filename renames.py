@@ -122,18 +122,33 @@ CORP_LINK = '<li><a href="http://primarysite.net">Website design by PrimarySite'
 EXTENDS_BASE = '{% extends "BuildTemplate/base.html" %}'
 
 '''BASE.HTML REPLACE STRINGS'''
-BASE_ABOUT_US = '{% topic_menu_full about-us "About Us" %}\r\n'
-BASE_KEY_INFO = '{% topic_menu_full key-information "Key Information" %}\r\n'
-BASE_NEWS_EVENTS = '{% topic_menu_full news-and-events "News and Events" %}\r\n'
-BASE_PARENTS = '{% topic_menu_full parents "Parents" %}\r\n'
-BASE_CHILDREN = '{% topic_menu_full children "Children" %}\r\n'
+BASE_ABOUT_US = (
+                '                        {% topic_menu_full'
+                ' about-us "About Us" %}\r\n'
+                )
+BASE_KEY_INFO = (
+                '                        {% topic_menu_full'
+                ' key-information "Key Information" %}\r\n'
+                )
+BASE_NEWS_EVENTS = (
+                '                        {% topic_menu_full'
+                ' news-and-events "News and Events" %}\r\n'
+                )
+BASE_PARENTS = (
+                '                        {% topic_menu_full'
+                ' parents "Parents" %}\r\n'
+                )
+BASE_CHILDREN = (
+                '                        {% topic_menu_full'
+                ' children "Children" %}\r\n'
+                )
 
 '''SPECIAL.SITEMAP.HTML REPLACE STRINGS'''
-SITEMAP_ABOUT_US = '{% topic_menu_full about-us %}\r\n'
-SITEMAP_KEY_INFO = '{% topic_menu_full key-information %}\r\n'
-SITEMAP_NEWS_EVENTS = '{% topic_menu_full news-and-events %}\r\n'
-SITEMAP_PARENTS = '{% topic_menu_full parents %}\r\n'
-SITEMAP_CHILDREN = '{% topic_menu_full children %}\r\n'
+SITEMAP_ABOUT_US = '            {% topic_menu_full about-us %}\r\n'
+SITEMAP_KEY_INFO = '            {% topic_menu_full key-information %}\r\n'
+SITEMAP_NEWS_EVENTS = '            {% topic_menu_full news-and-events %}\r\n'
+SITEMAP_PARENTS = '            {% topic_menu_full parents %}\r\n'
+SITEMAP_CHILDREN = '            {% topic_menu_full children %}\r\n'
 
 '''BREADCRUMB TOPIC LINKS'''
 BREADCRUMB_NEWS_EVENTS = '<li><a href="{% topic_url news-and-events %}">News and Events</a></li>'
@@ -279,7 +294,7 @@ def style136(slug,p):
 def style204(slug):
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += slug
-    stylerule ++ ' ul {}\r\n'
+    stylerule += ' ul {}\r\n'
     return stylerule
 
 def style225(slug):

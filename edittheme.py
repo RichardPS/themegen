@@ -26,11 +26,11 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
         if file == 'core.homepage.html':
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'base.html':
-            text = text.replace(BASE_ABOUT_US.rjust(24), '##')
-            text = text.replace(BASE_KEY_INFO.rjust(24), '')
-            text = text.replace(BASE_NEWS_EVENTS.rjust(24), '')
-            text = text.replace(BASE_PARENTS.rjust(24), '')
-            text = text.replace(BASE_CHILDREN.rjust(24), '')
+            text = text.replace(BASE_ABOUT_US, '##')
+            text = text.replace(BASE_KEY_INFO, '')
+            text = text.replace(BASE_NEWS_EVENTS, '')
+            text = text.replace(BASE_PARENTS, '')
+            text = text.replace(BASE_CHILDREN, '')
             # replace corp link
             text = text.replace(CORP_LINK, new_corp_link(nursery,calendarweek))
             newtopics = ''
@@ -62,11 +62,11 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
             text = text.replace('Kids\' Zone', specialpages['kidName'])
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'special.sitemap.html':
-            text = text.replace(SITEMAP_ABOUT_US.rjust(12), '##')
-            text = text.replace(SITEMAP_KEY_INFO.rjust(12), '')
-            text = text.replace(SITEMAP_NEWS_EVENTS.rjust(12), '')
-            text = text.replace(SITEMAP_PARENTS.rjust(12), '')
-            text = text.replace(SITEMAP_CHILDREN.rjust(12), '')
+            text = text.replace(SITEMAP_ABOUT_US, '##')
+            text = text.replace(SITEMAP_KEY_INFO, '')
+            text = text.replace(SITEMAP_NEWS_EVENTS, '')
+            text = text.replace(SITEMAP_PARENTS, '')
+            text = text.replace(SITEMAP_CHILDREN, '')
             newslugs = ''
             i = 0
             while i < len(topicslugs):
