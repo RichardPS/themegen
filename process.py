@@ -45,18 +45,6 @@ def sitemapprocess(sitemap,themename,nursery):
     # call edit theme function in editTheme.py
     zipName = processtheme(topicnames, topicslugs,
         themeslug, specialpages, nursery)
-    #populate dictionary with test variables
-    '''siteinfo = {
-        'theme_name':themename,
-        'theme_slug':themeslug,
-        'site_map':sitemaparray,
-        'page_script':pagescript,
-        'specialpages':specialpages,
-        'topicnames':topicnames,
-        'topicslugs':topicslugs,
-        'zipName':zipName,
-        'nursery':nursery,
-        }'''
     # populate dictionary for live env
     siteinfo = {
         'theme_name':themename,
