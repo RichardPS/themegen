@@ -124,11 +124,11 @@ PRIMARY_URL = 'http://primarysite.net/'
 EXTENDS_BASE = '{% extends "BuildTemplate/base.html" %}'
 
 '''BASE.HTML REPLACE STRINGS'''
-SPACE24 = '                        '
-SPACE12 = '            '
+SPACE24 = ''.rjust(24)
+SPACE12 = ''.rjust(12)
 
-BASE_ABOUT_US = '                        {% topic_menu_full about-us "About Us" %}\n'
-BASE_KEY_INFO = '                        {% topic_menu_full key-information "Key Information" %}\n'
+BASE_ABOUT_US = '{0}{% topic_menu_full about-us "About Us" %}\n'.format(SPACE24)
+BASE_KEY_INFO = '{0}{% topic_menu_full key-information "Key Information" %}\n'.format(SPACE24)
 BASE_NEWS_EVENTS = '                        {% topic_menu_full news-and-events "News and Events" %}\n'
 BASE_PARENTS = '                        {% topic_menu_full parents "Parents" %}\n'
 BASE_CHILDREN = '                        {% topic_menu_full children "Children" %}\n'
