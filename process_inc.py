@@ -1,5 +1,5 @@
 class SiteInfo(object):
-	def __init__(self):
+	def __init__(self, nursery):
 		self.specialpages = {
 		    'kidparent': 'Children',
 		    'kidname': 'Kids\' Zone',
@@ -18,7 +18,7 @@ class SiteInfo(object):
 		self.topicnames = []
 		self.pagescript = []
 		self.themeslug = 'BuildTemplate'
-		self.nursery = False
+		self.nursery = nursery
 		self.currenttopic = ''
 
 	def set_kp(self, parent):

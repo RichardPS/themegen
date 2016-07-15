@@ -127,30 +127,11 @@ EXTENDS_BASE = '{% extends "BuildTemplate/base.html" %}'
 SPACE24 = '                        '
 SPACE12 = '            '
 
-BASE_ABOUT_US = (
-                '                        {% topic_menu_full'
-                ' about-us "About Us" %}\r\n'
-                )
-
-BASE_KEY_INFO = (
-                '                        {% topic_menu_full'
-                ' key-information "Key Information" %}\r\n'
-                )
-
-BASE_NEWS_EVENTS = (
-                '                        {% topic_menu_full'
-                ' news-and-events "News and Events" %}\r\n'
-                )
-
-BASE_PARENTS = (
-                '                        {% topic_menu_full'
-                ' parents "Parents" %}\r\n'
-                )
-
-BASE_CHILDREN = (
-                '                        {% topic_menu_full'
-                ' children "Children" %}\r\n'
-                )
+BASE_ABOUT_US = '                        {% topic_menu_full about-us "About Us" %}\n'
+BASE_KEY_INFO = '                        {% topic_menu_full key-information "Key Information" %}\n'
+BASE_NEWS_EVENTS = '                        {% topic_menu_full news-and-events "News and Events" %}\n'
+BASE_PARENTS = '                        {% topic_menu_full parents "Parents" %}\n'
+BASE_CHILDREN = '                        {% topic_menu_full children "Children" %}\n'
 
 '''SPECIAL.SITEMAP.HTML REPLACE STRINGS'''
 SITEMAP_ABOUT_US = '            {% topic_menu_full about-us %}\r\n'
@@ -242,7 +223,7 @@ def base_topic(slug,name):
 def sitemap_topic(slug):
     newitem = '            '
     newitem += '{% topic_menu_full '
-    newitem += slug
+    newitem += str(slug)
     newitem += ' %}\r\n'
     return newitem
 
@@ -250,7 +231,7 @@ def topic_breadcrumb(parent):
     newcrumb = '<li><a href="{% topic_url '
     newcrumb += slugify(parent, to_lower=True)
     newcrumb += ' %}">'
-    newcrumb += parent
+    newcrumb += str(parent)
     newcrumb += '</a></li>'
     return newcrumb
 
@@ -258,7 +239,7 @@ def tour_breadcrumb(tourpagename):
     tourcrumb = '<li><a href="{% topic_url '
     tourcrumb += slugify(tourpagename, to_lower=True)
     tourcrumb += ' %}">'
-    tourcrumb += tourpagename
+    tourcrumb += str(tourpagename)
     tourcrumb += '</a></li>'
     return tourcrumb
 
@@ -274,13 +255,13 @@ def new_corp_link(nursery,calendarweek):
 # function to create new css rules for new topics
 def homecss(topicslug):
     homerule = '.main-nav .ps_topic_slug_'
-    homerule += topicslug
+    homerule += str(topicslug)
     homerule += ' {}\r\n'
     return homerule
 
 def style129(slug,p,z):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' { background-position: 0 -'
     stylerule += str(p)
     stylerule += 'px; z-index: '
@@ -290,9 +271,9 @@ def style129(slug,p,z):
 
 def style136(slug,p):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ':focus, .main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ':hover { background-position: right -'
     stylerule += str(p)
     stylerule += 'px; }\r\n'
@@ -300,28 +281,28 @@ def style136(slug,p):
 
 def style204(slug):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul {}\r\n'
     return stylerule
 
 def style225(slug):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul li a {}\r\n'
     return stylerule
 
 def style241(slug):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul li:focus, .main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul li:hover {}\r\n'
     return stylerule
 
 def style249(slug):
     stylerule = '.main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul a:focus, .main-nav .ps_topic_slug_'
-    stylerule += slug
+    stylerule += str(slug)
     stylerule += ' ul a:hover {}\r\n'
     return stylerule

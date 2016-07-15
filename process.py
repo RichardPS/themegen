@@ -1,58 +1,45 @@
-#PROCESS SITEMAP
+# PROCESS SITEMAP
 # -*- coding: UTF-8 -*-
 import re
 from slugify import slugify
 from edittheme import processtheme
+from process_inc import SiteInfo
 
-# declare global variables
-pagescript = []
-topicnames = []
-topicslugs =[]
-currenttopic = ""
-specialpages = {
-    "kidParent":"Children",
-    "kidName":"Kids' Zone",
-    "newsParent":"News and Events",
-    "newsName":"Latest News",
-    "letterParent":"News and Events",
-    "letterName":"Newsletters",
-    "calendarParent":"News and Events",
-    "calendarName":"Calendar",
-    "tourParent":"About Us",
-    "tourName":"School Tour",
-    }
+KIDSZONE_SHIM = '**/special/kidszone'
+NEWS_SHIM = '**/stream/news/full/1/-//'
+LETTER_SHIM = '**/stream/newsletters/full/1/-//'
+CALENDAR_SHIM = '**calendar_grid'
+DIARY_SHIM = '**/diary/list/'
+TOUR_SHIM = '**/special/virtual-tour'
 
-# init function
-def sitemapprocess(sitemap,themename,nursery):
-    # clear pagescript list if page resubmitted
-    global pagescript
-    global topicslugs
-    global topicnames
-    # clear global variables
-    topicslugs = []
-    topicnames = []
-    pagescript = []
-    #split sitemap to list
+def sitemapprocess(sitemap, themename, nursery):
+    ''' create new SiteInfo instance '''
+    siteinfo = SiteInfo(nursery)
+    ''' split sitemap into list '''
     sitemaparray = sitemap.split('\n')
-    #remove blank items in list
+    ''' remove blank items in list '''
     sitemaparray = filter(None, sitemaparray)
-    #call function to generate theme name (no spaces or numbers)
-    themeslug = slugthemename(themename)
-    #call function to replace bullet points for ##
-    sitemaparray = markpages(sitemaparray)
-    #generate pagescript
-    createpages(sitemaparray)
-    # call edit theme function in editTheme.py
-    zipName = processtheme(topicnames, topicslugs,
-        themeslug, specialpages, nursery)
-    # populate dictionary for live env
-    siteinfo = {
-        'theme_name':themename,
-        'page_script':pagescript,
-        'zipName':zipName,
+    ''' call mark page function and push sitemaparray to instance '''
+    siteinfo.set_sitemaparray(markpages(sitemaparray))
+    ''' set themename '''
+    siteinfo.set_themeslug(slugthemename(themename))
+    ''' generate pagescript in SiteInfo instance '''
+    siteinfo = createpages(siteinfo)
+    ''' call edit theme function and create zip '''
+    zipname = processtheme(
+        siteinfo.topicnames,
+        siteinfo.topicslugs,
+        siteinfo.themeslug,
+        siteinfo.specialpages,
+        siteinfo.nursery,
+        )
+    ''' return required site info to page '''
+    sitedict = {
+        'theme_name': siteinfo.themeslug,
+        'page_script': siteinfo.pagescript,
+        'zipname': siteinfo.themeslug,
     }
-    #return site info dictionary
-    return siteinfo
+    return sitedict
 
 # create theme name slug
 def slugthemename(themename):
@@ -67,50 +54,55 @@ def markpages(sitemap):
     return markedsitemap
 
 # loop thgouh sitemap and id topics/pages
-def createpages(sitemaparray):
-    global pagescript
-    global currenttopic
-    global topicList
-    global topicnames
-    global topicslugs
+def createpages(siteinfo):
+    siteinfo = siteinfo
+    sitemaparray = siteinfo.sitemaparray
     for item in sitemaparray:       
         if item[:2] != '##':
-            currenttopic = item.strip()
-            topicnames.extend([currenttopic])
-            topicslugs.extend([slugify(currenttopic, to_lower=True)])
+            siteinfo.set_currenttopic(item.strip())
+            siteinfo.ext_topicnames(siteinfo.currenttopic)
+            siteinfo.ext_topicslugs(slugify(
+                siteinfo.currenttopic, to_lower=True))
         else:
             item = re.sub("^[(#\s)]{1,}","",item).strip()
-            pagescript.extend([currenttopic + '\\' + slugify(currenttopic, \
-                to_lower=True) + '||' + processpage(item)])
-    return pagescript
+            siteinfo = processpage(item, siteinfo)
+            #siteinfo.ext_pagescript.extend([siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + processpage(item, siteinfo)])
+    return siteinfo
 
 # add elements to special pages for sitemap
-def processpage(pageshims):
-    global specialpages
-    if "**kids" in pageshims:
-        specialpages["kidParent"] = currenttopic
-        specialpages["kidName"] = pageshims.replace("**kids","")
-        pageshims = pageshims.replace("**kids","**/special/kidszone")
-    elif "**news" in pageshims:
-        specialpages["newsParent"] = currenttopic
-        specialpages["newsName"] = pageshims.replace("**news","")
-        pageshims = pageshims.replace("**news","**/stream/news/full/1/-//")
-    elif "**letter" in pageshims:
-        specialpages["letterParent"] = currenttopic
-        specialpages["letterName"] = pageshims.replace("**letter","")
-        pageshims = pageshims.replace("**letter","**/stream/newsletters/full/1/-//")
-    elif "**calendar" in pageshims:
-        specialpages["calendarParent"] = currenttopic
-        specialpages["calendarName"] = pageshims.replace("**calendar","")
-        pageshims = pageshims.replace("**calendar","**calendar_grid")
-    elif "**diary" in pageshims:
-        specialpages["calendarParent"] = currenttopic
-        specialpages["calendarName"] = pageshims.replace("**diary","")
-        pageshims = pageshims.replace("**diary","**/diary/list/")
-    elif "**tour" in pageshims:
-        specialpages["tourParent"] = currenttopic
-        specialpages["tourName"] = pageshims.replace("**tour","")
-        pageshims = pageshims.replace("**tour","**/special/virtual-tour")
+def processpage(pageshims, siteinfo):
+    siteinfo = siteinfo
+    if '**kids' in pageshims:
+        siteinfo.set_kp(siteinfo.currenttopic)
+        siteinfo.set_kn(pageshims.replace('**kids',''))
+        page = pageshims.replace('**kids', KIDSZONE_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    elif '**news' in pageshims:
+        siteinfo.set_np(siteinfo.currenttopic)
+        siteinfo.set_nn(pageshims.replace('**news',''))
+        page = pageshims.replace('**news', NEWS_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    elif '**letter' in pageshims:
+        siteinfo.set_lp(siteinfo.currenttopic)
+        siteinfo.set_ln(pageshims.replace('**letter',''))
+        page = pageshims.replace('**letter', LETTER_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    elif '**calendar' in pageshims:
+        siteinfo.set_cp(siteinfo.currenttopic)
+        siteinfo.set_cn(pageshims.replace('**calendar',''))
+        page = pageshims.replace('**calendar', CALENDAR_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    elif '**diary' in pageshims:
+        siteinfo.set_cp(siteinfo.currenttopic)
+        siteinfo.set_cn(pageshims.replace('**diary',''))
+        page = pageshims.replace('**diary', DIARY_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    elif '**tour' in pageshims:
+        siteinfo.set_tp(siteinfo.currenttopic)
+        siteinfo.set_tn(pageshims.replace('**tour',''))
+        page = pageshims.replace('**tour', TOUR_SHIM)
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
     else:
-        pageshims = pageshims
-    return pageshims
+        page = pageshims
+        siteinfo.ext_pagescript(siteinfo.currenttopic + '\\' + slugify(siteinfo.currenttopic, to_lower=True) + '||' + page)
+    return siteinfo

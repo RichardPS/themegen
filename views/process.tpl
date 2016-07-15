@@ -1,6 +1,6 @@
 % themename = siteinfo['theme_name']
 % pageScript = siteinfo['page_script']
-% zipName = siteinfo['zipName']
+% zipname = siteinfo['zipname']+'.zip'
 % page_title = page_title
 
 {{page_title}}
@@ -10,6 +10,6 @@
 % end
 <hr>
 
-<a href="{{zipName}}">Download Theme</a>
+<a href="{{zipname}}">Download Theme</a>
 <hr>
 <a href="/">Return Home</a>
