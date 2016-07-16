@@ -9,8 +9,8 @@ from bottle import static_file
 from bottle import view
 
 # Local
-from generictemplate import buildgeneric
-from process import sitemapprocess
+from imports.generictemplate import buildgeneric
+from imports.process import sitemapprocess
 
 
 @get('/<filename:re:.*\.js>')

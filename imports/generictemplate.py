@@ -5,7 +5,7 @@ import os
 
 def buildgeneric():
     themeName = 'BuildTemplate'
-    newthemedirs = os.listdir('new')
+    newthemedirs = os.listdir('sourcefiles/new')
 
     themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
 
@@ -23,5 +23,6 @@ def buildgeneric():
             # Add all the files in this folder to the ZIP file.
             for filename in filenames:
                 themeZip.write(os.path.join(foldername, filename),
-                    arcname=os.path.join(os.path.relpath(foldername, os.path.dirname(folder)), filename))
+                    arcname=os.path.join(os.path.relpath(foldername,
+                    os.path.dirname(folder)), filename))
     themeZip.close()

@@ -1,0 +1,143 @@
+{% extends "BuildTemplate/base.html" %}
+{% load themer %}
+
+{% block title %}Home{% endblock %}
+
+    {% block styles %}
+        <link rel="stylesheet" type="text/css" href="{% theme_asset_file homepage-global.css %}">
+        <link rel="stylesheet" type="text/css" media="(min-width: 981px)" href="{% theme_asset_file homepage.css %}">
+        <link rel="stylesheet" type="text/css" media="(max-width: 980px)" href="{% theme_asset_file homepage-responsive.css %}">
+
+        {# UNSUPPORTED RESPONSIVE #}
+        <!--[if lt IE 9]>
+            <link rel="stylesheet" type="text/css" href="{% theme_asset_file homepage.css %}">
+        <![endif]-->
+    {% endblock %}
+
+{% block body %}<body class="home-body">{% endblock %}
+
+    {# HEADER SECTION #}
+    {% block header %}{% endblock %}
+
+    {# CONTENT SECTION #}
+    {% block content %}
+
+        {# SCROLLING BANNER #}
+        <section class="scrolling-banner medium">
+            <span>{% snippet scrolling-banner "Scrolling Banner" %}</span>
+        </section>
+
+        {# HOME TEXT #}
+        <div id="home-text" class="home-text medium">{% snippet home-text "Home Text" %}</div>
+
+        {# SLIDESHOW #}
+         <section class="home-slideshow responsive-slideshow">
+            {% slideshow_responsive home-slideshow "Home Slideshow" show_on_mobile %}
+         </section>
+         <div class="home-slideshow-mask"></div>
+
+        {# NOTICEBOARD #}
+        <section class="noticeboard updates-area xsmall">
+            <h2><a href="{% activity_stream_url headline noticeboard %}">Noticeboard</a></h2>
+
+            {% activity_stream_compact 3 newsitem newsletteritem %}
+
+            <span class="read-more text-center">
+                <a href="{% activity_stream_url headline noticeboard %}">Read more</a>
+            </span>
+        </section>
+
+        {# DIARY DATES #}
+        <section class="calendar-dates updates-area xsmall">
+            <h2><a href="{% calendar_grid_url %}">Calendar Dates</a></h2>
+
+            <ul>{% diary_summary_list 3 %}</ul>
+
+            <span class="read-more text-center">
+                <a href="{% calendar_grid_url %}">Read more</a>
+            </span>
+        </section>
+
+        {# HOUSE POINTS #}
+        <section class="house-points">
+            <h2>House Points</h2>
+
+            <ul class="house-points-list">
+                <li class="house-1">
+                    <span class="housename">Green</span>
+                    <span class="housenumber">{% snippet house-1 "House 1" %}</span>
+                </li>
+                <li class="house-2">
+                    <span class="housename">Blue</span>
+                    <span class="housenumber">{% snippet house-2 "House 2" %}</span>
+                </li>
+                <li class="house-3">
+                    <span class="housename">Orange</span>
+                    <span class="housenumber">{% snippet house-3 "House 3" %}</span>
+                </li>
+                <li class="house-4">
+                    <span class="housename">Red</span>
+                    <span class="housenumber">{% snippet house-4 "House 4" %}</span>
+                </li>
+            </ul>
+        </section>
+
+        {# TWITTER FEED #}
+        <section class="twitter">
+            <h2 class="text-center">Twitter</h2>
+
+            <div id="tweets" class="small tweet">
+                {# Tweets are pulled in via JS #}
+            </div>
+
+            <a href="http://twitter.com/PrimarySiteLtd" class="tweet-all small" target="_blank">Read All Tweets</a>
+        </section>
+
+        {# HIT COUNTER #}
+        <section class="hit-counter">
+            <span class="hit-counter-pre-text">We've had</span>
+            {% hit_counter %}
+            <span class="hit-counter-post-text">visitors</span>
+        </section>
+
+        {# VLE #}
+        <a class="vle-link graphical-links" href="#" target="_blank">VLE Login</a>
+
+        {# QUICK LINK #}
+        {# <a class="quick-link-1 graphical-links" href="{% base_slug quick-link-1 %}">{% page_title_of_base_slug quick-link-1 %}</a> #}
+
+        {# SCHOOL ADDRESS #}
+        <ul class="school-address small">
+            <li class="school-address-line">Anytown Primary School,</li>
+            <li class="school-address-line">Any Road,</li>
+            <li class="school-address-line">Anytown,</li>
+            <li class="school-address-line">Midshire,</li>
+            <li class="school-address-line">ABC 123</li>
+            {# Add the phone number and email address through the home page lightbox #}
+            <li class="school-address-phone">{% snippet phone-number "Phone Number" %}</li>
+            <li class="school-address-email"><a href="mailto:{% snippet email-address "Email Address" %}">{% snippet email-address "Email Address" %}</a></li>
+        </ul>
+
+        {# GOOGLE SEARCH #}
+        <section class="google-search">
+            <form action="https://www.google.com/cse" id="cse-search-box">
+                <div>
+                  <input type="hidden" name="cx" value="thisisdoneinhouse">
+                  <input type="hidden" name="ie" value="UTF-8">
+                  <input type="text" name="q" size="30">
+                  <input type="submit" name="sa" value="Search">
+                </div>
+            </form>
+            <script type="text/javascript" src="https://www.google.com/cse/brand?form=cse-search-box&amp;lang=en"></script>
+        </section>
+
+        {# ANIMATION #}
+        <span class="boy-football animation"></span>
+
+        {# AWARDS BAR #}
+        <section class="awards"></section>
+    {% endblock %}
+
+    {% block footer %}{% endblock %}
+
+    {% block scripts %}{% endblock %}

@@ -1,0 +1,402 @@
+/* SITE CORE STYLES
+=================== */
+html {}
+
+body {
+  /* CHOOSE A FONT-STACK */
+  /* Wide Sans-serif */
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+  /* Narrow Sans-serif */
+  font-family: 'Segoe UI', Tahoma, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Wide Serif*/
+  font-family: 'Hoefler Text', Constantia, Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  /* Narrow Serif */
+  font-family: Garamond, 'Free Serif', 'Times New Roman', Times, serif;
+  /* Curvy  */
+  font-family: Chalkboard, 'Comic Sans MS', ChalkboardSE-Regular, LDFComicSans, sans-serif;
+  font-size: 1.5em;
+  color: #004669;
+}
+
+
+/* Typography
+ ============ */
+
+h1,
+.xxlarge {
+  font-size: 2.6rem;
+}
+
+h2,
+.xlarge {
+  font-size: 2.2rem;
+}
+
+/* This is for block titles and the cookie info table headings */
+h2,
+.ps_cookie-title {
+  color: #3a90d9;
+}
+
+h3,
+.large {
+  font-size: 2.0rem;
+}
+
+h4,
+.medium {
+  font-size: 1.6rem;
+}
+
+h5,
+.small {
+  font-size: 1.2rem;
+}
+
+h6,
+.xsmall {
+  font-size: 1.1rem;
+}
+
+
+/* Text Highlight Colour
+======================== */
+/* These selection rule sets have to be separate. */
+
+::-moz-selection {
+  color: black;
+  background-color: #a8deec;
+}
+
+::selection {
+  color: black;
+  background-color: #a8deec;
+}
+
+
+/* Link Colours
+ ============== */
+
+a {
+  color: #0c71d9;
+}
+
+a:focus,
+a:hover,
+a:active {
+  color: #fdd71e;
+}
+
+/* Home link within the header */
+.home-link {
+  display: block;
+  position: relative;
+  z-index: 105;
+  text-indent: -9999px;
+}
+
+
+/* Top Navigation Bar
+===================== */
+
+.login-link a {
+  color: #fff;
+}
+
+.login-link a:focus,
+.login-link a:hover,
+.login-link a:active {
+  color: #fdd71e;
+}
+
+
+/* Website Struture
+=================== */
+
+.inner-container {
+  position: relative;
+}
+
+
+/* Policy & PrimarySite Link
+============================ */
+
+.footer-links {
+  padding-bottom: 5px;
+}
+
+.footer-links ul {
+  list-style-type: none;
+}
+
+.footer-left li {
+  margin-right: 20px;
+}
+
+
+/* Utility Styles
+================= */
+
+.text-right {
+  float: right;
+  text-align: right;
+}
+
+.text-center {
+  display: block;
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-hide {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+}
+
+
+/* Page Title
+============= */
+
+.page-title {
+  position: relative;
+  font-weight: bold;
+  line-height: 1.3;
+  color: #fff;
+}
+
+
+/* Breadcrumbs
+============== */
+
+.breadcrumbs {
+  margin: 5px 0 20px;
+}
+
+.breadcrumbs > li:before {
+  color: #f7dd57;
+}
+
+.breadcrumbs li a {
+  /* Add a color here to override the default link colour */
+}
+
+.breadcrumbs li a:focus,
+.breadcrumbs li a:hover {
+  /* Add a color here to override the default link colour */
+}
+
+
+/* News Styles
+============== */
+
+.ps_activity-date-info {
+  color: #0c71d9;
+}
+
+.ps_form-search input[type="text"] {
+  border-color: #80aed8;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px #e0e8ec;
+  color: #437a99;
+}
+
+.ps_form-search input[type="submit"] {
+  color: #0872d8;
+}
+
+.ps_form-search input[type="submit"]:focus,
+.ps_form-search input[type="submit"]:hover {
+  color: #002d5a;
+}
+
+
+/* Calendar Styles
+================== */
+
+/* Diary Detail */
+.ps_event {
+  background-color: #d0e5ea;
+}
+
+.ps_calendar {
+  background-color: #fff;
+}
+
+.ps_calendar-month {
+  background-color: #0b72d9;
+}
+
+.ps_event-title a {
+  color: #0055a7;
+}
+
+.ps_event-title a:hover {
+  color: #e86105;
+}
+
+.ps_event-desc {
+  color: #333;
+}
+
+
+/* Kids' Zone Styles
+==================== */
+
+.kidszone {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  list-style-type: none;
+}
+
+.kidszone ul {
+  text-align: center;
+}
+
+.kidszone li {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  min-height: 150px;
+  margin: 10px 10px;
+  text-align: center;
+  font-weight: bold;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.kidszone li:focus span,
+.kidszone li:hover span {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.lt-ie10 .kidszone li:focus span,
+.lt-ie10 .kidszone li:hover span {
+  margin-top: -4px;
+}
+
+.kidszone a {
+  display: block;
+  position: relative;
+  padding: 155px 0 0 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+
+.kidszone span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  background: url(kids-zone.png) no-repeat;
+  transition: 0.3s;
+  -webkit-transform: scale(0.8) rotate(0.01deg);
+  transform: scale(0.8) rotate(0.01deg);
+}
+
+.kidszone .english-icon {
+  background-position: left top;
+}
+
+.kidszone .maths-icon {
+  background-position: -150px top;
+}
+
+.kidszone .science-icon {
+  background-position: -300px top;
+}
+
+.kidszone .history-icon {
+  background-position: -450px top;
+}
+
+.kidszone .games-icon {
+  background-position: left bottom;
+}
+
+.kidszone .ks1links-icon {
+  background-position: -150px bottom;
+}
+
+.kidszone .ks2links-icon {
+  background-position: -300px bottom;
+}
+
+.kidszone .brainbuilders-icon {
+  background-position: -450px bottom;
+}
+
+/* For the Kidszone Iframe */
+.kidszone-content {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 605px;
+  border-radius: 15px;
+  margin: 0 auto;
+}
+
+.kidszone-iframe {
+  border: 3px solid #0b72d9;
+  border-radius: 15px;
+  background-color: #0b72d9;
+}
+
+
+/* Button / Contact Form Styles
+============================= */
+
+.ps_form-block-errorlist li {
+  color: #b94a48;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.ps_form-blocks .ps_form-btn,
+.ps_prev,
+.ps_next {
+  box-shadow: 0px 3px 0px #005079; /* If you want to remove this style, put box-shadow: none; instead of completely removing it to override styles from the CMS */
+  color: #fff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+  background: #0d89b9;
+}
+
+.ps_prev:focus,
+.ps_prev:hover,
+.ps_next:focus,
+.ps_next:hover,
+.ps_form-blocks .ps_form-btn:focus,
+.ps_form-blocks .ps_form-btn:hover {
+  color: #fff;
+  background-color: #1f9bca;
+}
+
+
+/* Cookie Notice Styles
+======================= */
+
+.cookie-corner,
+.cookie-notice-header {
+  background: #ffb100;
+}
+
+.cookie-icon-star {
+  fill: #fff;
+}
+
+.cookie-icon-letter {
+  fill: #717171;
+}
+
+.cookie-notice-header {
+  border-color: #e49e00;
+  color: #fff;
+}

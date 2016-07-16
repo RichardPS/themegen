@@ -1,0 +1,357 @@
+/* SITE CORE STYLES
+=================== */
+html {
+  font-size: 62.5%;
+  background-color: #fff; /* Please have a colour or image - background on html needed for javascript */
+}
+
+body {
+  color: #004669;
+  background: #fff url(bodybg.jpg) center top repeat-x;
+}
+
+
+/* Website Struture
+=================== */
+.container {
+  background: url(container.jpg) center top no-repeat;
+}
+
+.inner-container {
+  width: 980px;
+  max-width: 980px;
+  margin: 0 auto;
+  background: url(slither.jpg) center top repeat-y;
+}
+
+.main-header {
+  position: relative;
+  height: 144px;
+  background: url(header.jpg) center top no-repeat;
+}
+
+/* Home link within the header */
+.home-link {
+  width: 544px;
+  height: 61px;
+  left: 9px;
+  top: 40px;
+  border: 1px solid red; /* Remove the border - Only present for visability */
+}
+
+.content-container {
+  position: relative;
+  min-height: 360px;
+  padding: 0 40px 20px 210px;
+  background: url(watermark.jpg) center top no-repeat;
+}
+
+
+/* Log in Link
+============== */
+.login-link a {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  line-height: 1.8;
+  text-align: right;
+  padding: 3px 5px;
+  border-radius: 2px;
+  background-color: #E86105;
+  z-index: 101;
+}
+
+.login-responsive {
+  display: none;
+}
+
+/* Page Title
+============= */
+.page-title {
+  width: 755px;
+  left: -15px;
+  padding: 0 0 3px 13px;
+  margin: 0 0 10px 0;
+  background: #ff8400 url(title-background.jpg) center top no-repeat;
+}
+
+
+/* Footer
+========= */
+footer {
+  height: 80px;
+  background: #fff url(footer.jpg) center top no-repeat;
+}
+
+
+/* Navigation
+============= */
+.main-nav {
+  position: absolute;
+  width: 150px; /*  Change width for horizontal nav  */
+  height: auto;
+  top: 120px;
+  left: 21px;
+  margin: 0 auto;
+  outline: none;
+  z-index: 101;
+}
+
+.main-nav h2 {
+  display: none;
+}
+
+.main-nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav ul li {
+  position: relative;
+  display: block;
+  width: 150px;  /* Width of image/button */
+  height: 52px;  /* Height of image/button */
+  text-indent: -9999px;
+  background: url(nav.png) left top no-repeat; /* An image sprite with all navigation buttons in */
+  cursor: pointer;
+  float: left;
+}
+
+.main-nav ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  text-shadow: 2px 2px 1px #000; /* Remove text-shadow if not required */
+}
+
+/* Change the background position to show the correct image for each navigation button within the sprite */
+.main-nav .home-btn { background-position: 0 0; z-index: 200; }
+.main-nav .ps_topic_slug_about-us { background-position: 0 -52px; z-index: 199; }
+.main-nav .ps_topic_slug_key-information { background-position: 0 -104px; z-index: 198; }
+.main-nav .ps_topic_slug_news-and-events { background-position: 0 -156px; z-index: 197; }
+.main-nav .ps_topic_slug_parents { background-position: 0 -208px; z-index: 196; }
+.main-nav .ps_topic_slug_children { background-position: 0 -260px; z-index: 195; }
+
+.main-nav .home-btn:focus, .main-nav .home-btn:hover { background-position: right top; }
+.main-nav .ps_topic_slug_about-us:focus, .main-nav .ps_topic_slug_about-us:hover { background-position: right -52px; }
+.main-nav .ps_topic_slug_key-information:focus, .main-nav .ps_topic_slug_key-information:hover { background-position: right -104px; }
+.main-nav .ps_topic_slug_news-and-events:focus, .main-nav .ps_topic_slug_news-and-events:hover { background-position: right -156px; }
+.main-nav .ps_topic_slug_parents:focus, .main-nav .ps_topic_slug_parents:hover { background-position: right -208px; }
+.main-nav .ps_topic_slug_children:focus, .main-nav .ps_topic_slug_children:hover { background-position: right -260px; }
+
+
+/* Pop Ups */
+
+/* Styles for ALL pop-up menus added here, styles for individual menus added below */
+.main-nav ul li ul {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 140px;
+  text-align: center;
+  border: solid 2px #fff;
+  border-radius: 5px; /* Remove if navigation doesn't have a border radius */
+  background-color: #B10505;
+  z-index: 102;
+}
+
+.main-nav ul li ul,
+.main-nav ul li ul li {
+  width: 150px;
+}
+
+.main-nav ul li.ps_nav-top-level:focus ul,
+.main-nav ul li.ps_nav-top-level:hover ul {
+  display: block;
+}
+
+.main-nav ul li.ps_nav-top-level:focus ul ul,
+.main-nav ul li.ps_nav-top-level:hover ul ul {
+  display: none;
+}
+
+.main-nav li ul li {
+  display: block;
+  width: 100%;
+  height: auto; /* Resets the height from the main li buttons */
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+  background: none;
+}
+
+.main-nav li ul li:first-child { /* Remove if navigation doesn't have a border radius */
+  border-radius: 2px 2px 0 0; /* Applies a border radius to first li in pop-up */
+}
+
+.main-nav li ul li:last-child { /* Remove if navigation doesn't have a border radius */
+  border-radius: 0 0 2px 2px; /* Applies a border radius to last li in pop-up */
+}
+
+.main-nav li ul li:focus,
+.main-nav li ul li:hover {
+  background-color: #FDD71E; /* Applies a background colour for pop-up li's */
+}
+
+.main-nav li ul li:only-child:focus,
+.main-nav li ul li:only-child:hover { /* Remove if navigation doesn't have a border radius */
+  border-radius: 2px; /* Applies a border radius on focus/hover if it is the only item in the pop-up */
+}
+
+/* To specifically style each pop-up, eg individual Background, Border etc.
+   DELETE IF NOT NEEDED */
+.main-nav .ps_topic_slug_about-us ul {}
+.main-nav .ps_topic_slug_key-information ul {}
+.main-nav .ps_topic_slug_news-and-events ul {}
+.main-nav .ps_topic_slug_parents ul {}
+.main-nav .ps_topic_slug_children ul {}
+
+/* To style the links in the pop up menus
+   Styles for ALL menus added here, styles for individual menus added below */
+.main-nav li ul li a {
+  display: block;
+  width: auto;
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 7px;
+  margin: 0;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+/* To specifically style links for each menu, eg individual background, text colour etc.
+   DELETE IF NOT NEEDED */
+.main-nav .ps_topic_slug_about-us ul li a {}
+.main-nav .ps_topic_slug_key-information ul li a {}
+.main-nav .ps_topic_slug_news-and-events ul li a {}
+.main-nav .ps_topic_slug_parents ul li a {}
+.main-nav .ps_topic_slug_children ul li a {}
+
+/* To style the hover effects for the links in the popup menus
+   Styles for ALL menus added here, styles for individual menus added below */
+.main-nav li ul li a:focus,
+.main-nav li ul li a:hover {
+  color: #000;
+}
+
+/* To specifically style the hover effects for the background if you decide to
+   keep the border radius - if not, apply background to <a> tag below.
+   DELETE IF NOT NEEDED */
+.main-nav .ps_topic_slug_about-us ul li:focus, .main-nav .ps_topic_slug_about-us ul li:hover {}
+.main-nav .ps_topic_slug_key-information ul li:focus, .main-nav .ps_topic_slug_key-information ul li:hover {}
+.main-nav .ps_topic_slug_news-and-events ul li:focus, .main-nav .ps_topic_slug_news-and-events ul li:hover {}
+.main-nav .ps_topic_slug_parents ul li:focus, .main-nav .ps_topic_slug_parents ul li:hover {}
+.main-nav .ps_topic_slug_children ul li:focus, .main-nav .ps_topic_slug_children ul li:hover {}
+
+
+/* To specifically style the hover effects for the links for each menu, eg, text colour etc.  */
+.main-nav .ps_topic_slug_about-us ul a:focus, .main-nav .ps_topic_slug_about-us ul a:hover {}
+.main-nav .ps_topic_slug_key-information ul a:focus, .main-nav .ps_topic_slug_key-information ul a:hover {}
+.main-nav .ps_topic_slug_news-and-events ul li a:focus, .main-nav .ps_topic_slug_news-and-events ul li a:hover {}
+.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .ps_topic_slug_parents ul li a:hover {}
+.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}
+
+
+/* Policy & PrimarySite Link
+============================ */
+.footer-links {
+  position: relative;
+  width: 970px;
+  height: 45px;
+  color: #000;
+  padding-top: 47px;
+  margin: 0 auto;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-left li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-links a {
+  color: #000;
+}
+
+.footer-links a:focus,
+.footer-links a:hover {
+  color: #B10505;
+}
+
+.footer-left {
+  float: left;
+}
+
+
+/* News Styles
+============== */
+.news-items {
+  width: 580px;
+}
+
+
+/* Scroll To Top Button
+======================= */
+.scroll-top {
+  color: #929292;
+  border: 1px solid #dfdfdf;
+  border-bottom: none;
+  background-color: #fafafa;
+}
+
+.scroll-top:hover {
+  color: #3a90d9;
+}
+
+
+/* Additional Styles
+==================== */
+/* Google Translator */
+#google_translate_element {
+  position: absolute;
+  height: 26px;
+  top: 448px;
+  left: 12px;
+}
+
+.goog-te-gadget-simple {
+  width: 168px;
+  height: 30px;
+  border: 1px solid #ADD9FE!important;
+  border-radius: 4px;
+}
+
+.goog-te-gadget-simple span {
+  display: inline-block;
+  line-height: 2.4;
+}
+
+.goog-te-menu-value span:first-child {
+  width: 112px;
+}
+
+.goog-te-menu-value span + img + span {
+  color: #ADD9FE!important;
+  border-left-color: #ADD9FE!important;
+}
+
+.goog-te-menu-value > span + img + span {
+  height: 21px;
+  line-height: 1.8;
+  margin-top: 5px;
+}
+
+.goog-te-banner-frame {
+  position: absolute!important;
+  top: -40px!important;
+}
+
+
+/* IE STYLES
+============ */
+/* IE 9 */
+.ie9 {}

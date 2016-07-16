@@ -1,0 +1,25 @@
+{% extends "MyTheme/base.html" %}
+{% load themer %}
+
+{% block title %}Cookie Information{% endblock %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}<body>{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block page_title %}Cookie Information{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% home_url %}">Home</a></li>
+    <li><a href="{% special_page_url cookie-information %}">Cookie Information</a></li>
+{% endblock %}
+
+{% block content %}
+    {% include "themes/cookie_information.html" %}
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}{% endblock %}

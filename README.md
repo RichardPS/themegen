@@ -16,16 +16,16 @@ New brach, nurseryoption
 
 ####Handy git commands
 **Add changed files**
-git add <filename>
+git add filename
 
 **commit changes**
 git commit -m "description"
 
 **push changes to repo**
-git push origin <branchname>
+git push origin branchname
 
 **change branch**
-git checkout <branchname>
+git checkout branchname
 
 **check for changes**
 git status

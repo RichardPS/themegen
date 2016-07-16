@@ -6,18 +6,18 @@ import os
 from datetime import datetime
 from slugify import slugify
 
-from renames import *
+from edittheme_inc import *
 
 calendarweek = datetime.today().isocalendar()[1]
 
 # read/edit/write theme files
 def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
-    htmlpath = "orig/html/"
-    csspath = "orig/css/"
+    htmlpath = "sourcefiles/orig/html/"
+    csspath = "sourcefiles/orig/css/"
     themepath = "themes/"
-    htmlwritepath = "new/html/"
-    csswritepath = "new/css/"
-    newthemepath = "new/"
+    htmlwritepath = "sourcefiles/new/html/"
+    csswritepath = "sourcefiles/new/css/"
+    newthemepath = "sourcefiles/new/"
 
     print topicnames
     print topicslugs
@@ -27,6 +27,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
     for file in htmlnames:
         with open(htmlpath+file,'r') as f:
             text = f.read()
+            text = text.replace('\r\n', '\n')
         if file == 'core.homepage.html':
             text = text.replace(EXTENDS_BASE, extends_theme(themeslug))
         elif file == 'base.html':
@@ -97,6 +98,7 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
     for file in cssnames:
         with open(csspath+file,'r') as f:
             text = f.read()
+            text = text.replace('\r\n', '\n')
         if file == 'homepage.css':
             text = text.replace(HOME_ABOUT_US, '##')
             text = text.replace(HOME_KEY_INFO, '')
@@ -202,13 +204,13 @@ def processtheme(topicnames,topicslugs,themeslug,specialpages,nursery):
 
 def ziptheme(themename):
 
-    newthemedirs = os.listdir('new')
+    newthemedirs = os.listdir('sourcefiles/new')
 
     themeZip = zipfile.ZipFile('static/themezips/' + themename + '.zip','w')
 
     for item in newthemedirs:
         #print item
-        folder = 'new/' + item + '/'
+        folder = 'sourcefiles/new/' + item + '/'
 
         folder = os.path.relpath(folder)
 
