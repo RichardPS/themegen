@@ -4,23 +4,19 @@ import zipfile
 import os
 
 def buildgeneric():
-    themeName = 'BuildTemplate'
+    ''' create zip of BuildTemplte without any changes '''
+    themename = 'BuildTemplate'
     newthemedirs = os.listdir('sourcefiles/new')
-
-    themeZip = zipfile.ZipFile('static/themezips/' + themeName + '.zip','w')
-
+    themeZip = zipfile.ZipFile('static/themezips/{0}.zip','w').format(themename)
     for item in newthemedirs:
-        #print item
-        folder = 'new/' + item + '/'
-
+        folder = 'new/{0/'.format(item)
         folder = os.path.relpath(folder)
-
         for foldername, subfolders, filenames in os.walk(folder):
-            # Add the current folder to the ZIP file if not root folder
+            ''' Add the current folder to the ZIP file if not root folder '''
             if foldername != folder:
                 themeZip.write(foldername,
                     arcname=os.path.relpath(foldername, os.path.dirname(folder)))
-            # Add all the files in this folder to the ZIP file.
+            ''' Add all the files in this folder to the ZIP file. '''
             for filename in filenames:
                 themeZip.write(os.path.join(foldername, filename),
                     arcname=os.path.join(os.path.relpath(foldername,

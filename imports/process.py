@@ -1,4 +1,4 @@
-# PROCESS SITEMAP
+''' PROCESS SITEMAP '''
 # -*- coding: UTF-8 -*-
 import re
 from slugify import slugify
@@ -43,19 +43,19 @@ def sitemapprocess(sitemap, themename, nursery):
     }
     return sitedict
 
-# create theme name slug
+''' create theme name slug '''
 def slugthemename(themename):
-    #remove all non alpha characters
+    ''' remove all non alpha characters '''
     themeslug = re.sub("[^a-zA-Z]","",themename)
     return themeslug
 
-# find pages (bullet point) and mark with ##, these are pages in a topic
+''' find pages (bullet point) and mark with ##, these are pages in a topic '''
 def markpages(sitemap):
-    #replace bullet points for ##
+    ''' replace bullet points for ## '''
     markedsitemap = [item.replace('•','##') for item in sitemap]
     return markedsitemap
 
-# loop thgouh sitemap and id topics/pages
+''' loop thgouh sitemap and id topics/pages '''
 def createpages(siteinfo):
     siteinfo = siteinfo
     sitemaparray = siteinfo.sitemaparray
@@ -70,7 +70,7 @@ def createpages(siteinfo):
             siteinfo = processpage(item, siteinfo)
     return siteinfo
 
-# add elements to special pages for sitemap
+''' add elements to special pages for sitemap '''
 def processpage(pageshims, siteinfo):
     siteinfo = siteinfo
     if '**kids' in pageshims:

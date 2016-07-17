@@ -1,6 +1,5 @@
-
 from slugify import slugify
-#define constants for html
+''' define constants for html '''
 '''SEO TEXT PRIMARY'''
 SEOPRIMARY = [
     "Designed by PrimarySite",
@@ -145,6 +144,7 @@ BREADCRUMB_NEWS_EVENTS = '<li><a href="{% topic_url news-and-events %}">News and
 BREADCRUMB_CHILDREN = '<li><a href="{% topic_url children %}">Children</a></li>'
 BREADCRUMB_ABOUT_US = '<li><a href="{% topic_url about-us %}">About Us</a></li>'
 
+''' Kidszone files list '''
 KIDSZONEPAGES = [
     'special.brain-builders.html',
     'special.english.html',
@@ -157,13 +157,14 @@ KIDSZONEPAGES = [
     'special.kidszone.html',
 ]
 
+''' calendar files list '''
 CALENDARPAGES = [
     'calendar.grid.html',
     'diary.detail.html',
     'diary.list.html',
 ]
 
-#define constants for css
+''' define constants for css '''
 HOME_ABOUT_US = '.main-nav .ps_topic_slug_about-us {}\n'
 HOME_KEY_INFO = '.main-nav .ps_topic_slug_key-information {}\n'
 HOME_NEW_EVENTS = '.main-nav .ps_topic_slug_news-and-events {}\n'
@@ -208,22 +209,26 @@ STYLE249_PARENTS = '.main-nav .ps_topic_slug_parents ul li a:focus, .main-nav .p
 STYLE249_CHILDREN = '.main-nav .ps_topic_slug_children ul li a:focus, .main-nav .ps_topic_slug_children ul li a:hover {}\n'
 
 
-#functions to create html topics, slugs and breadcrumbs
+''' functions to create html topics, slugs and breadcrumbs '''
 def extends_theme(themename):
+    ''' replace theme name function '''
     a = '{% extends "'
     b = '/base.html" %}'
     return '{0}{1}{2}'.format(a, themename, b)
 
 def base_topic(slug,name):
+    ''' create topic code for base.html '''
     a = '{% topic_menu_full '
     b = ' "'
     c = '" %}\n'
     return '{0}{1}{2} "{3}{4}'.format(SPACE24, a, slug, name, c)
 
 def sitemap_topic(slug):
+    ''' create topic code for special.sitemap.html  '''
     return '{0}{{% topic_menu_full {1} %}}\n'.format(SPACE12, str(slug))
 
 def topic_breadcrumb(parent):
+    ''' generate parent topic breadcrumb '''
     newcrumb = '<li><a href="{% topic_url '
     newcrumb += slugify(parent, to_lower=True)
     newcrumb += ' %}">'
@@ -232,6 +237,7 @@ def topic_breadcrumb(parent):
     return newcrumb
 
 def tour_breadcrumb(tourpagename):
+    ''' create breadcrumb for tour page '''
     tourcrumb = '<li><a href="{% topic_url '
     tourcrumb += slugify(tourpagename, to_lower=True)
     tourcrumb += ' %}">'
@@ -240,6 +246,7 @@ def tour_breadcrumb(tourpagename):
     return tourcrumb
 
 def new_corp_link(nursery,calendarweek):
+    ''' create new corp link '''
     if nursery:
         url = NURSERY_URL
         link = SEONURSERY[calendarweek]
@@ -248,14 +255,15 @@ def new_corp_link(nursery,calendarweek):
         link = SEOPRIMARY[calendarweek]
     return '<li><a href="{0}">"{1}'.format(url,link)
 
-# function to create new css rules for new topics
 def homecss(topicslug):
+    ''' function to create new css rules for new topics '''
     homerule = '.main-nav .ps_topic_slug_'
     homerule += str(topicslug)
     homerule += ' {}\n'
     return homerule
 
 def style129(slug,p,z):
+    ''' create css rule to replace line 129 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ' { background-position: 0 -'
@@ -266,6 +274,7 @@ def style129(slug,p,z):
     return stylerule
 
 def style136(slug,p):
+    ''' create css rule to replace line 136 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ':focus, .main-nav .ps_topic_slug_'
@@ -276,18 +285,21 @@ def style136(slug,p):
     return stylerule
 
 def style204(slug):
+    ''' create css rule to replace line 204 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ' ul {}\n'
     return stylerule
 
 def style225(slug):
+    ''' create css rule to replace line 225 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ' ul li a {}\n'
     return stylerule
 
 def style241(slug):
+    ''' create css rule to replace line 241 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ' ul li:focus, .main-nav .ps_topic_slug_'
@@ -296,6 +308,7 @@ def style241(slug):
     return stylerule
 
 def style249(slug):
+    ''' create css rule to replace line 249 onwards '''
     stylerule = '.main-nav .ps_topic_slug_'
     stylerule += str(slug)
     stylerule += ' ul a:focus, .main-nav .ps_topic_slug_'
